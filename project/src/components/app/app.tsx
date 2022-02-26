@@ -15,17 +15,17 @@ const Settings = {
 function App(): JSX.Element {
   return (<BrowserRouter>
     <Routes>
-      <Route path={AppRoute.Main} element={<Layout/>}>
-        <Route index element={<MainScreen count={Settings.count}/>}/>
-        <Route path={AppRoute.Favorites} element={
-          <PrivateRoute authorization={AuthorizationStatus.NoAuth}>
-            <Favorites/>
-          </PrivateRoute>
-        }/>
-        <Route path={AppRoute.Login} element={<Login/>}/>
-        <Route path={AppRoute.Room} element={<Property/>}/>
-        <Route path='*' element={<MainScreenEmpty/>}/>
-      </Route>
+      <Route index element={<Layout>
+        <MainScreen count={Settings.count}/>
+      </Layout>}/>
+      <Route path={AppRoute.Favorites} element={
+        <PrivateRoute authorization={AuthorizationStatus.NoAuth}>
+          <Layout><Favorites/></Layout>
+        </PrivateRoute>
+      }/>
+      <Route path={AppRoute.Login} element={<Login/>}/>
+      <Route path={AppRoute.Room} element={<Layout><Property/></Layout>}/>
+      <Route path='*' element={<MainScreenEmpty/>}/>
     </Routes>
   </BrowserRouter>);
 }
