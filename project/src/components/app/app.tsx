@@ -1,6 +1,5 @@
 import MainScreen from '../main-screen/main-screen';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Layout from '../layout';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
@@ -15,16 +14,14 @@ const Settings = {
 function App(): JSX.Element {
   return (<BrowserRouter>
     <Routes>
-      <Route index element={<Layout>
-        <MainScreen count={Settings.count}/>
-      </Layout>}/>
+      <Route index element={<MainScreen count={Settings.count}/>}/>
       <Route path={AppRoute.Favorites} element={
         <PrivateRoute authorization={AuthorizationStatus.NoAuth}>
-          <Layout><Favorites/></Layout>
+          <Favorites/>
         </PrivateRoute>
       }/>
       <Route path={AppRoute.Login} element={<Login/>}/>
-      <Route path={AppRoute.Room} element={<Layout><Property/></Layout>}/>
+      <Route path={AppRoute.Room} element={<Property/>}/>
       <Route path='*' element={<MainScreenEmpty/>}/>
     </Routes>
   </BrowserRouter>);
