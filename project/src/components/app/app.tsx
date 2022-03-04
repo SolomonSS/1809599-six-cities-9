@@ -18,7 +18,7 @@ function App({offers}:AppScreenProps): JSX.Element {
         </PrivateRoute>
       }/>
       <Route path={AppRoute.Login} element={<Login/>}/>
-      <Route path={AppRoute.Room} element={<Property/>}/>
+      <Route path={AppRoute.Room} element={<Property offers={offers}/>}/>
       <Route path='*' element={<MainScreenEmpty/>}/>
     </Routes>
   </BrowserRouter>);

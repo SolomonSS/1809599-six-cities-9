@@ -8,7 +8,7 @@ type CardProps = {
 }
 
 function Card({offer, onMouseOverHandler}:CardProps):JSX.Element {
-  const [{type, previewImage, price, rating, title, id}] = offer;
+  const {type, previewImage, price, rating, title, id} = offer;
   return (
     <article className="cities__place-card place-card" onMouseOver={onMouseOverHandler(id)}>
       <div className="cities__image-wrapper place-card__image-wrapper">
@@ -36,7 +36,7 @@ function Card({offer, onMouseOverHandler}:CardProps):JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Room.concat(id.toString())}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

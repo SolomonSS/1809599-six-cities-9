@@ -1,8 +1,7 @@
 import {Offer} from '../types/types';
 import {comments} from "./comments";
 
-const firstOffer: Offer = [
-  {
+const firstOffer: Offer = {
     "bedrooms": 3,
     "city": {
       "location": {
@@ -40,11 +39,9 @@ const firstOffer: Offer = [
     "title": "Beautiful & luxurious studio at great location",
     "type": "apartment",
     'comments': comments,
-  }
-];
+  };
 
-const secondOffer: Offer = [
-  {
+const secondOffer: Offer = {
     "bedrooms": 4,
     "city": {
       "location": {
@@ -82,10 +79,9 @@ const secondOffer: Offer = [
     "title": "Beautiful & luxurious studio at great location",
     "type": "apartment",
     'comments': comments,
-  }
-];
+  };
 
-const thirdOffer: Offer = [
+const thirdOffer: Offer =
   {
     "bedrooms": 5,
     "city": {
@@ -125,7 +121,7 @@ const thirdOffer: Offer = [
     "type": "apartment",
     'comments': comments,
   }
-];
+;
 
 const offers: Offer[] = [firstOffer, secondOffer, thirdOffer];
 

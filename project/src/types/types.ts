@@ -1,4 +1,4 @@
-export type Offer = [{
+export type Offer = {
   bedrooms: number
   city: {
     location: {
@@ -32,7 +32,7 @@ export type Offer = [{
   title: string
   type: string
   comments: Comment[]
-}];
+};
 
 export type Comment = {
   comment: string
