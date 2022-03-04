@@ -3,6 +3,8 @@ import {Offer} from "../../types/types";
 import Reviews from "../reviews/reviews";
 import {useParams} from "react-router-dom";
 import MainScreenEmpty from "../main-screen-empty/main-screen-empty";
+import {Fragment} from "react";
+import Header from "../header/header";
 
 type PropsType = {
   offers: Offer[]
@@ -17,6 +19,8 @@ const Property = ({offers}: PropsType) => {
   const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description, comments} = property;
 
   return (
+    <Fragment>
+      <Header/>
     <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
@@ -201,6 +205,7 @@ const Property = ({offers}: PropsType) => {
         </section>
       </div>
     </main>
+    </Fragment>
   );
 }
 
