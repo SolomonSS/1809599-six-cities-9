@@ -1,17 +1,13 @@
-import Card from '../card/card';
 import {Link} from "react-router-dom";
 import Layout from '../layout';
-
-function getCard(): JSX.Element {
-  return <Card/>;
-}
+import {Offer} from "../../types/types";
+import Cards from "../cards/cards";
 
 type PropsType = {
-  count: number;
+  offers: Offer[];
 }
 
-const MainScreen = ({count}: PropsType): JSX.Element => {
-  const offers = Array.from({length: count}, getCard);
+const MainScreen = ({offers}: PropsType): JSX.Element => {
   return (
     <Layout>
       <div className="page page--gray page--main">
@@ -74,7 +70,7 @@ const MainScreen = ({count}: PropsType): JSX.Element => {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  {offers.map((offer) => offer)}
+                  <Cards offers={offers}/>
                 </div>
               </section>
               <div className="cities__right-section">

@@ -6,18 +6,15 @@ import Favorites from '../favorites/favorites';
 import Property from '../property/property';
 import PrivateRoute from '../private-route';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
+import {AppScreenProps} from "../../types/types";
 
-const Settings = {
-  count: 6,
-};
-
-function App(): JSX.Element {
+function App({offers}:AppScreenProps): JSX.Element {
   return (<BrowserRouter>
     <Routes>
-      <Route index element={<MainScreen count={Settings.count}/>}/>
+      <Route index element={<MainScreen offers={offers}/>}/>
       <Route path={AppRoute.Favorites} element={
         <PrivateRoute authorization={AuthorizationStatus.NoAuth}>
-          <Favorites/>
+          <Favorites offers={offers}/>
         </PrivateRoute>
       }/>
       <Route path={AppRoute.Login} element={<Login/>}/>
