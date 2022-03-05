@@ -1,16 +1,21 @@
-import {Offer} from "../../types/types";
-import {Link} from "react-router-dom";
-import {AppRoute} from "../../const";
+import {Offer} from '../../types/types';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 type CardProps = {
   offer: Offer;
-  onMouseOverHandler: Function;
+  handleOnMouseOver: (arg0: number) => void;
 }
 
-function Card({offer, onMouseOverHandler}:CardProps):JSX.Element {
+function Card({offer, handleOnMouseOver}:CardProps):JSX.Element {
   const {type, previewImage, price, rating, title, id} = offer;
+
+  const handleMouseOver = () =>{
+    handleOnMouseOver(id);
+  };
+
   return (
-    <article className="cities__place-card place-card" onMouseOver={onMouseOverHandler(id)}>
+    <article className="cities__place-card place-card" id = {id.toString()} onMouseOver={handleMouseOver}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
@@ -36,7 +41,7 @@ function Card({offer, onMouseOverHandler}:CardProps):JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{title}</Link>
+          <Link to={`${AppRoute.Room}${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

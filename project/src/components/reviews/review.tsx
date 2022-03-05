@@ -1,17 +1,17 @@
-import {Comment} from "../../types/types";
+import {Comment} from '../../types/types';
 
 type PropsType ={
   review:Comment
 };
 
-const Review = ({review}:PropsType)=>{
+function Review({review}:PropsType) {
   const {user, rating, comment, date} = review;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54"
-               alt="Reviews avatar"
+            alt="Reviews avatar"
           />
         </div>
         <span className="reviews__user-name">
@@ -32,6 +32,6 @@ const Review = ({review}:PropsType)=>{
       </div>
     </li>
   );
-};
+}
 
 export default Review;

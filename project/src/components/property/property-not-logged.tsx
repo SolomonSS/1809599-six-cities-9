@@ -1,5 +1,5 @@
-const PropertyNotLogged = () => (
-  <div className="page">
+function PropertyNotLogged() {
+  return (<div className="page">
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
@@ -256,7 +256,7 @@ const PropertyNotLogged = () => (
         </section>
       </div>
     </main>
-  </div>
-);
+  </div>);
+}
 
 export default PropertyNotLogged;

@@ -1,13 +1,13 @@
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 import Layout from '../layout';
-import {Offer} from "../../types/types";
-import Cards from "../cards/cards";
+import {Offer} from '../../types/types';
+import Cards from '../cards/cards';
 
 type PropsType = {
   offers: Offer[];
 }
 
-const MainScreen = ({offers}: PropsType): JSX.Element => {
+function MainScreen({offers}: PropsType): JSX.Element {
   return (
     <Layout>
       <div className="page page--gray page--main">
@@ -58,10 +58,10 @@ const MainScreen = ({offers}: PropsType): JSX.Element => {
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
                   Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
+                    <svg className="places__sorting-arrow" width="7" height="4">
+                      <use xlinkHref="#icon-arrow-select"></use>
+                    </svg>
+                  </span>
                   <ul className="places__options places__options--custom places__options--opened">
                     <li className="places__option places__option--active" tabIndex={0}>Popular</li>
                     <li className="places__option" tabIndex={0}>Price: low to high</li>
@@ -82,6 +82,6 @@ const MainScreen = ({offers}: PropsType): JSX.Element => {
       </div>
     </Layout>
   );
-};
+}
 
 export default MainScreen;
