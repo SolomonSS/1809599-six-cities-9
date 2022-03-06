@@ -5,10 +5,12 @@ type PropsType = {
   children: JSX.Element
 };
 
-const Layout = ({children}: PropsType):JSX.Element => (
-  <Fragment>
-    <Header />
-    {children}
-  </Fragment>
-);
+function Layout({children}: PropsType): JSX.Element {
+  return (
+    <Fragment>
+      <Header/>
+      {children}
+    </Fragment>);
+}
+
 export default Layout;

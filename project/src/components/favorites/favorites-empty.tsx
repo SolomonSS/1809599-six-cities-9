@@ -1,5 +1,5 @@
-const FavoritesEmpty = () =>(
-  <div className="page page--favorites-empty">
+function FavoritesEmpty() {
+  return (<div className="page page--favorites-empty">
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
@@ -44,7 +44,7 @@ const FavoritesEmpty = () =>(
         <img className="footer__logo" src='img/logo.svg' alt="6 cities logo" width="64" height="33"/>
       </a>
     </footer>
-  </div>
-);
+  </div>);
+}
 
 export default FavoritesEmpty;
