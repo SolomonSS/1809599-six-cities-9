@@ -6,9 +6,6 @@ function Cards({offers}: PropsType) {
   const offersList: Offer[] = offers.concat(offers);
   const [activeCard, setActiveCard] = useState(0);
 
-  const getActiveCard = () =>activeCard;
-  getActiveCard();
-
   const handleOnMouseOver = (id:number):void=>{
     setActiveCard(id);
   };
