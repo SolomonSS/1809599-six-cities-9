@@ -1,18 +1,19 @@
-import {Offer, PropsType} from '../../types/types';
-import {Fragment, useState} from 'react';
+import {Offer} from '../../types/types';
+import {Fragment} from 'react';
 import Card from '../card/card';
 
-function Cards({offers}: PropsType) {
-  const offersList: Offer[] = offers.concat(offers);
-  const [activeCard, setActiveCard] = useState(0);
+type CardsProps = {
+  offers: Offer[],
+  selectedOffer: number|null,
+  handleOnMouseOver: (arg0: number) => void
+};
 
-  const handleOnMouseOver = (id:number):void=>{
-    setActiveCard(id);
-  };
+function Cards({offers, selectedOffer, handleOnMouseOver}: CardsProps) {
+
 
   return(
     <Fragment>
-      {offersList.map((details)=>(<Card key={details.id} offer ={details} handleOnMouseOver={handleOnMouseOver}/>))}
+      {offers.map((details)=>(<Card key={details.id} selectedOffer={selectedOffer} offer ={details} handleOnMouseOver={handleOnMouseOver}/>))}
     </Fragment>);
 }
 

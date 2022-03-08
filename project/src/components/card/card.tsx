@@ -3,15 +3,18 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
 type CardProps = {
-  offer: Offer;
-  handleOnMouseOver: (arg0: number) => void;
-}
+  offer: Offer,
+  selectedOffer: number|null,
+  handleOnMouseOver: (arg0: number) => void
+};
 
-function Card({offer, handleOnMouseOver}:CardProps):JSX.Element {
+function Card({offer, handleOnMouseOver, selectedOffer}:CardProps):JSX.Element {
   const {type, previewImage, price, rating, title, id} = offer;
 
   const handleMouseOver = () =>{
-    handleOnMouseOver(id);
+    if(id===selectedOffer){
+      handleOnMouseOver(id);
+    }
   };
 
   return (

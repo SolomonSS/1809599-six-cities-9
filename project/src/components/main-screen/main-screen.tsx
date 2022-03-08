@@ -2,12 +2,17 @@ import {Link} from 'react-router-dom';
 import Layout from '../layout';
 import {Offer} from '../../types/types';
 import Cards from '../cards/cards';
+import Map from "../map/map";
+import {useState} from "react";
 
 type PropsType = {
   offers: Offer[];
 }
 
 function MainScreen({offers}: PropsType): JSX.Element {
+  const [activeCard, setActiveCard] = useState<number|null>(null);
+  const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
+
   return (
     <Layout>
       <div className="page page--gray page--main">
@@ -70,11 +75,11 @@ function MainScreen({offers}: PropsType): JSX.Element {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  <Cards offers={offers}/>
+                  <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers}/>
                 </div>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <Map city={offers[0].city} offers={offers} selectedOffer={activeCard}/>
               </div>
             </div>
           </div>

@@ -1,10 +1,12 @@
-import {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../layout';
 import {PropsType} from '../../types/types';
 import Cards from '../cards/cards';
 
 function Favorites({offers}: PropsType) {
+  const [activeCard, setActiveCard] = useState<number|null>(null);
+  const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
   return (
     <Fragment>
       <Layout>
@@ -22,7 +24,7 @@ function Favorites({offers}: PropsType) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards offers={offers}/>
+                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers}/>
                   </div>
                 </li>
 
@@ -35,7 +37,7 @@ function Favorites({offers}: PropsType) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards offers={offers}/>
+                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers}/>
                   </div>
                 </li>
               </ul>
