@@ -2,6 +2,7 @@ import {Icon, Marker} from 'leaflet';
 import {useEffect, useRef} from 'react';
 import {City, Offer} from '../../types/types';
 import useMap from '../../hooks/use-map/use-map';
+import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   city: City;
@@ -12,13 +13,13 @@ type MapProps = {
 const defaultCustomIcon = new Icon({
   iconUrl: 'img/pin.svg',
   iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: 'img/pin-active.svg',
   iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconAnchor: [20, 40],
 });
 
 function Map({city, offers, selectedOffer}: MapProps): JSX.Element {
@@ -48,7 +49,7 @@ function Map({city, offers, selectedOffer}: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer, city]);
 
-  return <section className={'cities__map map'} ref={mapRef}/>;
+  return <div className={'cities__map map'} ref={mapRef}/>;
 }
 
 export default Map;
