@@ -4,6 +4,7 @@ import {Offer} from '../../types/types';
 import Cards from '../cards/cards';
 import Map from '../map/map';
 import {useState} from 'react';
+import {CardMods, MapMods} from '../../const';
 
 type PropsType = {
   offers: Offer[];
@@ -75,11 +76,11 @@ function MainScreen({offers}: PropsType): JSX.Element {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers}/>
+                  <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers} mode={CardMods.Main}/>
                 </div>
               </section>
               <div className='cities__right-section'>
-                <Map city={offers[0].city} offers={offers} selectedOffer={activeCard}/>
+                <Map city={offers[0].city} offers={offers} selectedOffer={activeCard} mode={MapMods.MainScreen}/>
               </div>
             </div>
           </div>

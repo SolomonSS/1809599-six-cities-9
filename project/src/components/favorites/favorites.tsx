@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Layout from '../layout';
 import {PropsType} from '../../types/types';
 import Cards from '../cards/cards';
+import {CardMods} from '../../const';
 
 function Favorites({offers}: PropsType) {
   const [activeCard, setActiveCard] = useState<number|null>(null);
@@ -24,7 +25,7 @@ function Favorites({offers}: PropsType) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers}/>
+                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers} mode={CardMods.Main}/>
                   </div>
                 </li>
 
@@ -37,7 +38,7 @@ function Favorites({offers}: PropsType) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers}/>
+                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers} mode={CardMods.Main}/>
                   </div>
                 </li>
               </ul>
