@@ -5,10 +5,11 @@ import {AppRoute} from '../../const';
 type CardProps = {
   offer: Offer,
   selectedOffer: number|null,
-  handleOnMouseOver: (arg0: number) => void
+  handleOnMouseOver: (arg0: number) => void,
+  mode: string
 };
 
-function Card({offer, handleOnMouseOver, selectedOffer}:CardProps):JSX.Element {
+function Card({offer, handleOnMouseOver, selectedOffer, mode}:CardProps):JSX.Element {
   const {type, previewImage, price, rating, title, id} = offer;
 
   const handleMouseOver = () =>{
@@ -18,7 +19,7 @@ function Card({offer, handleOnMouseOver, selectedOffer}:CardProps):JSX.Element {
   };
 
   return (
-    <article className="cities__place-card place-card" onMouseOver={handleMouseOver}>
+    <article className={`${mode} place-card`} onMouseOver={handleMouseOver}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
