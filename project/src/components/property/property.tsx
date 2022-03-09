@@ -14,14 +14,13 @@ type PropsType = {
 
 function Property({offers}: PropsType) {
   const {id: propertyId} = useParams<{ id: string; }>();
+  const [activeCard, setActiveCard] = useState<number>(Number(propertyId));
+  const handleOnMouseOver = (cardId:number)=>setActiveCard(cardId);
+
   const property = offers.find((offer) => offer.id.toString() === propertyId);
   if(!property){
     return <MainScreenEmpty/>;
   }
-
-  const [activeCard, setActiveCard] = useState<number|null>(null);
-  const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
-
   const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description, comments} = property;
 
   return (
@@ -103,9 +102,9 @@ function Property({offers}: PropsType) {
               <Reviews reviews={comments}/>
             </div>
           </div>
-          <Map city={offers[0].city} offers={offers} selectedOffer={id} mode={MapMods.Property}/>
+          <Map city={offers[0].city} offers={offers} selectedOffer={activeCard} mode={MapMods.Property}/>
         </section>
-        <OtherPlaces offers={offers} selectedOffer={id} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
+        <OtherPlaces offers={offers} selectedOffer={activeCard} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
       </main>
     </Fragment>
   );
