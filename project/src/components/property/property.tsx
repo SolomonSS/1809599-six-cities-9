@@ -5,7 +5,7 @@ import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
 import {Fragment, useState} from 'react';
 import Header from '../header/header';
 import Map from '../map/map';
-import {CardMods, MapMods} from '../../const';
+import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
 
 type PropsType = {
@@ -13,7 +13,7 @@ type PropsType = {
 };
 
 function Property({offers}: PropsType) {
-  const {id: propertyId} = useParams<{ id: string; }>();
+  const {id: propertyId} = useParams();
   const [activeCard, setActiveCard] = useState<number>(Number(propertyId));
   const handleOnMouseOver = (cardId:number)=>setActiveCard(cardId);
 

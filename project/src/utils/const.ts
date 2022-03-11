@@ -20,3 +20,7 @@ export enum CardMods {
   Main = 'cities__place-card',
   Property = 'near-places__card',
 }
+
+export const DEFAULT_CITY = 'Paris';
+
+export const CitiesList = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

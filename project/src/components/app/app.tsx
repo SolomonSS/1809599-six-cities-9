@@ -1,6 +1,6 @@
 import MainScreen from '../main-screen/main-screen';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../utils/const';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import Property from '../property/property';

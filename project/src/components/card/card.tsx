@@ -1,11 +1,11 @@
 import {Offer} from '../../types/types';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute} from '../../utils/const';
 
 type CardProps = {
   offer: Offer,
   selectedOffer: number|null,
-  handleOnMouseOver: (arg0: number) => void,
+  handleOnMouseOver: (id: number) => void,
   mode: string
 };
 
