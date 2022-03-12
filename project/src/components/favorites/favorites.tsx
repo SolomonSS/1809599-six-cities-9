@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Layout from '../layout';
 import {PropsType} from '../../types/types';
 import Cards from '../cards/cards';
-import {CardMods} from '../../const';
+import {CardMods} from '../../utils/const';
 
 function Favorites({offers}: PropsType) {
   const [activeCard, setActiveCard] = useState<number|null>(null);
