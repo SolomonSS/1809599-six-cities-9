@@ -1,7 +1,8 @@
-import {useAppSelector} from '../hooks';
+import {getOffers} from '../store/selectors';
+import {useSelector} from 'react-redux';
 
 function useFilter (currentCity:string){
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useSelector(getOffers);
   return offers.filter((offer)=>offer.city.name === currentCity);
 }
 

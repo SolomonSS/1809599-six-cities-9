@@ -5,8 +5,9 @@ import Map from '../map/map';
 import {useState} from 'react';
 import {CardMods, MapMods} from '../../utils/const';
 import Cities from '../cities/cities';
-import {useAppSelector} from '../../hooks';
 import useFilter from '../../utils/utils';
+import {getCity} from '../../store/selectors';
+import {useSelector} from 'react-redux';
 
 type PropsType = {
   offers: Offer[];
@@ -15,7 +16,7 @@ type PropsType = {
 function MainScreen({offers}: PropsType): JSX.Element {
   const [activeCard, setActiveCard] = useState<number|null>(null);
   const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useSelector(getCity);
   return (
     <Layout>
       <div className="page page--gray page--main">

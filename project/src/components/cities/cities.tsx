@@ -1,10 +1,12 @@
 import {Link} from 'react-router-dom';
 import {CitiesList} from '../../utils/const';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useAppDispatch} from '../../hooks';
 import {changeCity} from '../../store/action';
+import {getCity} from '../../store/selectors';
+import {useSelector} from 'react-redux';
 
 function Cities() {
-  const currentCity = useAppSelector((state)=>state.city);
+  const currentCity = useSelector(getCity);
   const dispatch = useAppDispatch();
   return (
     <section className="locations container">
