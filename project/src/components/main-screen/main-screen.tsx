@@ -1,5 +1,4 @@
 import Layout from '../layout';
-import {AppScreenProps} from '../../types/types';
 import Cards from '../cards/cards';
 import Map from '../map/map';
 import {useState} from 'react';
@@ -10,7 +9,7 @@ import {getCity} from '../../store/selectors';
 import {useSelector} from 'react-redux';
 
 
-function MainScreen({offers}: AppScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<number|null>(null);
   const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
   const currentCity = useSelector(getCity);
@@ -47,7 +46,7 @@ function MainScreen({offers}: AppScreenProps): JSX.Element {
                 </div>
               </section>
               <div className='cities__right-section'>
-                <Map city={offers[0].city} offers={useFilter(currentCity)} selectedOffer={activeCard} mode={MapMods.MainScreen}/>
+                <Map city={useFilter(currentCity)[0].city} offers={useFilter(currentCity)} selectedOffer={activeCard} mode={MapMods.MainScreen}/>
               </div>
             </div>
           </div>

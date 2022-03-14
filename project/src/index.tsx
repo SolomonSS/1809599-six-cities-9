@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {store} from './store';
 import {completeOffers} from './store/action';
 
-store.dispatch(completeOffers);
+store.dispatch(completeOffers());
 
 ReactDOM.render(
   <React.StrictMode>

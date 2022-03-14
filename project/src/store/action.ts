@@ -11,6 +11,6 @@ export const completeOffers = createAsyncThunk('data/fetchOffers', async () => {
     const { data } = await api.get<Offers>(APIRoute.OFFERS);
     return data;
   } catch (err) {
-    throw err;
+    throw new Error();
   }
 });

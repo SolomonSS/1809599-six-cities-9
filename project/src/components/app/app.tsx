@@ -21,7 +21,7 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<MainScreen offers={offers}/>}/>
+        <Route index element={<MainScreen/>}/>
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute authorization={AuthorizationStatus.NoAuth}>
             <Favorites offers={offers}/>
