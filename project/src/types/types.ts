@@ -51,9 +51,7 @@ export type Comment = {
 };
 
 export type AppScreenProps = {
-  offers: Offer[]
+  offers: Offers
 }
 
-export type PropsType = {
-  offers: Offer[];
-}
+export type Offers = Offer[];

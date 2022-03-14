@@ -1,12 +1,13 @@
 import {DEFAULT_CITY} from '../utils/const';
 import {createReducer} from '@reduxjs/toolkit';
 import {changeCity, completeOffers} from './action';
-import {offers} from '../mocks/offers';
+import {InitialState} from '../types/state';
 
-const initialState = {
+const initialState: InitialState = {
   city: DEFAULT_CITY,
-  offers: offers,
-  activeCard:null,
+  offers: [],
+  fetchStatus: false,
+  authorizationStatus:false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -15,8 +16,14 @@ export const reducer = createReducer(initialState, (builder) => {
       const {city} = action.payload;
       state.city = city;
     })
-    .addCase(completeOffers, (state, action)=>{
-      const {offers} = action.payload;
-      state.offers = offers;
+    .addCase(completeOffers.fulfilled, (state, action)=>{
+      state.fetchStatus = true;
+      state.offers = action.payload;
+    })
+    .addCase(completeOffers.pending, (state)=>{
+      state.fetchStatus = false;
+    })
+    .addCase(completeOffers.rejected, (state)=>{
+      state.fetchStatus = false;
     });
 });

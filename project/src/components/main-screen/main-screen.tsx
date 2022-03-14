@@ -1,5 +1,5 @@
 import Layout from '../layout';
-import {Offer} from '../../types/types';
+import {AppScreenProps} from '../../types/types';
 import Cards from '../cards/cards';
 import Map from '../map/map';
 import {useState} from 'react';
@@ -9,11 +9,8 @@ import useFilter from '../../utils/utils';
 import {getCity} from '../../store/selectors';
 import {useSelector} from 'react-redux';
 
-type PropsType = {
-  offers: Offer[];
-}
 
-function MainScreen({offers}: PropsType): JSX.Element {
+function MainScreen({offers}: AppScreenProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<number|null>(null);
   const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
   const currentCity = useSelector(getCity);

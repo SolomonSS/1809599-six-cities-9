@@ -1,4 +1,4 @@
-import {Offer} from '../../types/types';
+import {AppScreenProps} from '../../types/types';
 import Reviews from '../reviews/reviews';
 import {useParams} from 'react-router-dom';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
@@ -8,11 +8,7 @@ import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
 
-type PropsType = {
-  offers: Offer[]
-};
-
-function Property({offers}: PropsType) {
+function Property({offers}: AppScreenProps) {
   const {id: propertyId} = useParams();
   const [activeCard, setActiveCard] = useState<number>(Number(propertyId));
   const handleOnMouseOver = (cardId:number)=>setActiveCard(cardId);

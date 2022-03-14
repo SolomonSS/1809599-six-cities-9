@@ -6,9 +6,17 @@ import Favorites from '../favorites/favorites';
 import Property from '../property/property';
 import PrivateRoute from '../private-route';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
-import {AppScreenProps} from '../../types/types';
+import {getOffers, getStatus} from "../../store/selectors";
+import {useSelector} from "react-redux";
 
-function App({offers}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const status = useSelector(getStatus);
+
+  if(!status){
+    return <MainScreenEmpty/>
+  }
+
   return (
     <BrowserRouter>
       <Routes>

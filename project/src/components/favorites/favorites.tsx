@@ -1,11 +1,11 @@
 import {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../layout';
-import {PropsType} from '../../types/types';
+import {AppScreenProps} from '../../types/types';
 import Cards from '../cards/cards';
 import {CardMods} from '../../utils/const';
 
-function Favorites({offers}: PropsType) {
+function Favorites({offers}: AppScreenProps) {
   const [activeCard, setActiveCard] = useState<number|null>(null);
   const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
   return (
