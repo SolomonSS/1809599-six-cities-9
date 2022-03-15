@@ -1,12 +1,12 @@
 import {Icon, Marker} from 'leaflet';
 import {useEffect, useRef} from 'react';
-import {City, Offers} from '../../types/types';
+import {City, Offer} from '../../types/types';
 import useMap from '../../hooks/use-map/use-map';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   city: City;
-  offers: Offers;
+  offers: Offer[];
   selectedOffer: number | null;
   mode: string;
 };

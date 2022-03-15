@@ -1,16 +1,6 @@
-import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
-import {Offers} from '../types/types';
-import {APIRoute} from '../utils/const';
-import {api} from '../services/api';
-
+import {createAction} from '@reduxjs/toolkit';
+import {Offer} from '../types/types';
 
 export const changeCity = createAction<{ city: string }>('change/city');
+export const loadOffers = createAction<Offer[]>('data/loadOffers');
 
-export const completeOffers = createAsyncThunk('data/fetchOffers', async () => {
-  try {
-    const { data } = await api.get<Offers>(APIRoute.OFFERS);
-    return data;
-  } catch (err) {
-    throw new Error();
-  }
-});

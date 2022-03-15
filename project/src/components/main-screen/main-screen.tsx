@@ -4,8 +4,7 @@ import Map from '../map/map';
 import {useState} from 'react';
 import {CardMods, MapMods} from '../../utils/const';
 import Cities from '../cities/cities';
-import useFilter from '../../utils/utils';
-import {getCity} from '../../store/selectors';
+import {getCity, getOffers} from '../../store/selectors';
 import {useSelector} from 'react-redux';
 
 
@@ -25,7 +24,7 @@ function MainScreen(): JSX.Element {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{useFilter(currentCity).length} places to stay in {currentCity}</b>
+                <b className="places__found">{useSelector(getOffers).length} places to stay in {currentCity}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -42,11 +41,11 @@ function MainScreen(): JSX.Element {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={useFilter(currentCity)} mode={CardMods.Main}/>
+                  <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={useSelector(getOffers)} mode={CardMods.Main}/>
                 </div>
               </section>
               <div className='cities__right-section'>
-                <Map city={useFilter(currentCity)[0].city} offers={useFilter(currentCity)} selectedOffer={activeCard} mode={MapMods.MainScreen}/>
+                <Map city={useSelector(getOffers)[0].city} offers={useSelector(getOffers)} selectedOffer={activeCard} mode={MapMods.MainScreen}/>
               </div>
             </div>
           </div>

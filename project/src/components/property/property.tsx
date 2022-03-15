@@ -7,6 +7,7 @@ import Header from '../header/header';
 import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
+import {comments} from '../../mocks/comments';
 
 function Property({offers}: AppScreenProps) {
   const {id: propertyId} = useParams();
@@ -17,7 +18,7 @@ function Property({offers}: AppScreenProps) {
   if(!property){
     return <MainScreenEmpty/>;
   }
-  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description, comments} = property;
+  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = property;
 
   return (
     <Fragment>
@@ -26,7 +27,7 @@ function Property({offers}: AppScreenProps) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image, index) => (
+              {images.map((image) => (
                 <div className="property__image-wrapper" key={id.toString() + image}>
                   <img className="property__image" src={image} alt="Photo studio"/>
                 </div>

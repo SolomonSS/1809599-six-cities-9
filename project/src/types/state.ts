@@ -1,6 +1,6 @@
 import {store} from '../store';
 
-import {Offers} from './types';
+import {Offer} from './types';
 
 export type State = ReturnType<typeof store.getState>;
 
@@ -8,7 +8,7 @@ export type AppDispatch = typeof store.dispatch;
 
 export type InitialState = {
   city: string,
-  offers: Offers,
+  offers: Offer[],
   authorizationStatus: boolean,
-  fetchStatus: boolean
+  fetchStatus: boolean,
 };

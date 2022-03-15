@@ -15,7 +15,9 @@ function App(): JSX.Element {
   const status = useSelector(getStatus);
 
   if(!status){
-    return <LoadingScreen/>;
+    return (
+      <LoadingScreen />
+    );
   }
 
   return (
