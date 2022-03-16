@@ -1,4 +1,4 @@
-import {Offer} from '../../types/types';
+import {AppScreenProps} from '../../types/types';
 import Reviews from '../reviews/reviews';
 import {useParams} from 'react-router-dom';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
@@ -7,12 +7,9 @@ import Header from '../header/header';
 import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
+import {comments} from '../../mocks/comments';
 
-type PropsType = {
-  offers: Offer[]
-};
-
-function Property({offers}: PropsType) {
+function Property({offers}: AppScreenProps) {
   const {id: propertyId} = useParams();
   const [activeCard, setActiveCard] = useState<number>(Number(propertyId));
   const handleOnMouseOver = (cardId:number)=>setActiveCard(cardId);
@@ -21,7 +18,7 @@ function Property({offers}: PropsType) {
   if(!property){
     return <MainScreenEmpty/>;
   }
-  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description, comments} = property;
+  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = property;
 
   return (
     <Fragment>
@@ -30,7 +27,7 @@ function Property({offers}: PropsType) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image, index) => (
+              {images.map((image) => (
                 <div className="property__image-wrapper" key={id.toString() + image}>
                   <img className="property__image" src={image} alt="Photo studio"/>
                 </div>

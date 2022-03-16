@@ -6,13 +6,24 @@ import Favorites from '../favorites/favorites';
 import Property from '../property/property';
 import PrivateRoute from '../private-route';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
-import {AppScreenProps} from '../../types/types';
+import {getOffers, getStatus} from '../../store/selectors';
+import {useSelector} from 'react-redux';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-function App({offers}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const status = useSelector(getStatus);
+
+  if(!status){
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<MainScreen offers={offers}/>}/>
+        <Route index element={<MainScreen/>}/>
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute authorization={AuthorizationStatus.NoAuth}>
             <Favorites offers={offers}/>

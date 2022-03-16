@@ -24,3 +24,19 @@ export enum CardMods {
 export const DEFAULT_CITY = 'Paris';
 
 export const CitiesList = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export enum APIRoute {
+  OFFERS = '/hotels',
+  FAVORITES = '/favorite',
+  CHANGE_FAVORITES_STATUS = '/favorite/{hotelId}/{status}',
+  COMMENTS = '/comments',
+  LOGIN = '/login',
+  LOGOUT = '/logout',
+}
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
+}
+

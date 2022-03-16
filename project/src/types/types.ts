@@ -54,6 +54,4 @@ export type AppScreenProps = {
   offers: Offer[]
 }
 
-export type PropsType = {
-  offers: Offer[];
-}
+export type ErrorType = unknown;
