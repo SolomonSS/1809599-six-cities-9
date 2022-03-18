@@ -4,22 +4,15 @@ import {AppRoute} from '../../utils/const';
 
 type CardProps = {
   offer: Offer,
-  selectedOffer: number|null,
-  handleOnMouseOver: (id: number) => void,
+  handleOnMouseOver: ((id: number| null) => void) | null,
   mode: string
 };
 
-function Card({offer, handleOnMouseOver, selectedOffer, mode}:CardProps):JSX.Element {
+function Card({offer, handleOnMouseOver, mode}:CardProps):JSX.Element {
   const {type, previewImage, price, rating, title, id} = offer;
 
-  const handleMouseOver = () =>{
-    if(id===selectedOffer){
-      handleOnMouseOver(id);
-    }
-  };
-
   return (
-    <article className={`${mode} place-card`} onMouseOver={handleMouseOver}>
+    <article className={`${mode} place-card`} onMouseOver={()=> handleOnMouseOver ? handleOnMouseOver(id) :null} onMouseLeave={()=> handleOnMouseOver ? handleOnMouseOver(null) : null}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
@@ -40,7 +33,7 @@ function Card({offer, handleOnMouseOver, selectedOffer, mode}:CardProps):JSX.Ele
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${rating*20}%`}}></span>
             <span className="visually-hidden">Rating {rating}</span>
           </div>
         </div>

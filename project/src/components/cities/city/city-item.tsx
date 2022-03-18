@@ -1,22 +1,16 @@
-import {useSelector} from 'react-redux';
-import {getCity} from '../../../store/selectors';
-import {useAppDispatch} from '../../../hooks';
 import {Link} from 'react-router-dom';
-import {changeCity} from '../../../store/action';
 
 type Props = {
-  city:string
+  city:string,
+  activeCity: string,
+  handleChangeCity: (cityName:string)=>void;
 }
 
-function CityItem ({city}:Props):JSX.Element {
-  const currentCity = useSelector(getCity);
-  const dispatch = useAppDispatch();
-  const setActive = currentCity === city ? 'tabs__item--active' : '';
-  const changeStoreCity = () => dispatch(changeCity({city}));
-
+function CityItem ({city, activeCity, handleChangeCity}:Props):JSX.Element {
+  const activeClass = activeCity === city ? 'tabs__item--active' : '';
   return (
     <li className="locations__item" key={city}>
-      <Link className={`locations__item-link tabs__item ${setActive}`} to="/" onClick={() => {changeStoreCity();}}>
+      <Link className={`locations__item-link tabs__item ${activeClass}`} to="/" onClick={() => {handleChangeCity(city);}}>
         <span>{city}</span>
       </Link>
     </li>

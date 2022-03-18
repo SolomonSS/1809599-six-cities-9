@@ -11,8 +11,8 @@ import {comments} from '../../mocks/comments';
 
 function Property({offers}: AppScreenProps) {
   const {id: propertyId} = useParams();
-  const [activeCard, setActiveCard] = useState<number>(Number(propertyId));
-  const handleOnMouseOver = (cardId:number)=>setActiveCard(cardId);
+  const [activeCard, setActiveCard] = useState<number| null>(Number(propertyId));
+  const handleOnMouseOver = (cardId:number|null)=>setActiveCard(cardId);
 
   const property = offers.find((offer) => offer.id.toString() === propertyId);
   if(!property){
@@ -101,7 +101,7 @@ function Property({offers}: AppScreenProps) {
           </div>
           <Map city={offers[0].city} offers={offers} selectedOffer={activeCard} mode={MapMods.Property}/>
         </section>
-        <OtherPlaces offers={offers} selectedOffer={activeCard} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
+        <OtherPlaces offers={offers} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
       </main>
     </Fragment>
   );
