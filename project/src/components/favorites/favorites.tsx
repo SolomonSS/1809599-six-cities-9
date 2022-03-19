@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react';
+import {Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../layout';
 import {AppScreenProps} from '../../types/types';
@@ -6,8 +6,6 @@ import Cards from '../cards/cards';
 import {CardMods} from '../../utils/const';
 
 function Favorites({offers}: AppScreenProps) {
-  const [activeCard, setActiveCard] = useState<number|null>(null);
-  const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
   return (
     <Fragment>
       <Layout>
@@ -25,7 +23,7 @@ function Favorites({offers}: AppScreenProps) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers} mode={CardMods.Main}/>
+                    <Cards offers={offers} mode={CardMods.Main}/>
                   </div>
                 </li>
 
@@ -38,7 +36,7 @@ function Favorites({offers}: AppScreenProps) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards handleOnMouseOver={handleOnMouseOver} selectedOffer={activeCard} offers={offers} mode={CardMods.Main}/>
+                    <Cards offers={offers} mode={CardMods.Main}/>
                   </div>
                 </li>
               </ul>

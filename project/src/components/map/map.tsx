@@ -11,13 +11,13 @@ type MapProps = {
   mode: string;
 };
 
-const defaultCustomIcon = new Icon({
+const defaultIcon = new Icon({
   iconUrl: 'img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
-const currentCustomIcon = new Icon({
+const customIcon = new Icon({
   iconUrl: 'img/pin-active.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
@@ -43,7 +43,7 @@ function Map({city, offers, selectedOffer, mode}: MapProps): JSX.Element {
         });
 
         marker
-          .setIcon(selectedOffer !== null && offer.id === selectedOffer ? currentCustomIcon : defaultCustomIcon)
+          .setIcon(offer.id === selectedOffer ? customIcon : defaultIcon)
           .addTo(map);
 
       });

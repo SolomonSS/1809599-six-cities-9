@@ -40,3 +40,11 @@ export enum HTTP_CODE {
   NOT_FOUND = 404,
 }
 
+export enum SortTypes {
+  POPULAR = 'Popular',
+  PRICE_LOW_HIGH = 'Price: low to high',
+  PRICE_HIGH_LOW = 'Price: high to low',
+  TOP_RATED = 'Top rated first'
+}
+
+export const ActiveSortClass = 'places__option--active';
