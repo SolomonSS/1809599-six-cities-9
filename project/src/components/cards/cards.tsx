@@ -4,7 +4,7 @@ import Card from '../card/card';
 
 type CardsProps = {
   offers: Offer[],
-  handleOnMouseOver: ((id: number| null) => void)| null,
+  handleOnMouseOver?: (id: number| null) => void,
   mode: string
 };
 

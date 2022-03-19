@@ -23,7 +23,7 @@ function Favorites({offers}: AppScreenProps) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards handleOnMouseOver={null} offers={offers} mode={CardMods.Main}/>
+                    <Cards offers={offers} mode={CardMods.Main}/>
                   </div>
                 </li>
 
@@ -36,7 +36,7 @@ function Favorites({offers}: AppScreenProps) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <Cards handleOnMouseOver={null} offers={offers} mode={CardMods.Main}/>
+                    <Cards offers={offers} mode={CardMods.Main}/>
                   </div>
                 </li>
               </ul>
