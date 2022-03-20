@@ -8,16 +8,11 @@ type CardProps = {
   mode: string
 };
 
-function Card({offer, handleOnMouseOver, mode}:CardProps):JSX.Element {
+function Card({offer, handleOnMouseOver = () => void 0, mode}:CardProps):JSX.Element {
   const {type, previewImage, price, rating, title, id} = offer;
-  const onMouseOver = () => {
-    handleOnMouseOver ? handleOnMouseOver(id) : null;
-  };
-  const onMouseLeave = ()=> {
-    handleOnMouseOver ? handleOnMouseOver(null) : null;
-  };
+
   return (
-    <article className={`${mode} place-card`} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
+    <article className={`${mode} place-card`} onMouseOver={()=>handleOnMouseOver(id)} onMouseLeave={()=>handleOnMouseOver(null)}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>

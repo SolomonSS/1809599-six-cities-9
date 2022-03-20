@@ -1,7 +1,13 @@
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../utils/const';
+import {useAppDispatch} from '../../hooks';
+import {logoutAction} from '../../services/api-actions';
+import SignInOut from '../sign-in-out/sign-in-out';
 
 function Header(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const onClick = () =>{
+    dispatch(logoutAction());
+  };
   return (
     <header className="header">
       <div className="container">
@@ -13,18 +19,7 @@ function Header(): JSX.Element {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <Link className="header__nav-link" to="#">
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
+              <SignInOut/>
             </ul>
           </nav>
         </div>
