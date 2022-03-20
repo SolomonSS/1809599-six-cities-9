@@ -1,5 +1,5 @@
 import MainScreen from '../main-screen/main-screen';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../utils/const';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
@@ -9,6 +9,8 @@ import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
 import {getOffers, getStatus} from '../../store/selectors';
 import {useSelector} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
+import HistoryRouter from '../../history/history-route';
+import browserHistory from '../../history';
 
 function App(): JSX.Element {
   const offers = useSelector(getOffers);
@@ -21,7 +23,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route index element={<MainScreen/>}/>
         <Route path={AppRoute.Favorites} element={
@@ -34,7 +36,7 @@ function App(): JSX.Element {
         <Route path={`${AppRoute.Room}:id`} element={<Property offers={offers}/>}/>
         <Route path='*' element={<MainScreenEmpty/>}/>
       </Routes>
-    </BrowserRouter>);
+    </HistoryRouter>);
 }
 
 export default App;
