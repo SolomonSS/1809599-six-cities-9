@@ -6,7 +6,7 @@ import SignOut from './sign-out/sign-out';
 
 const SignInOut = ():JSX.Element => {
   const auth = useSelector(checkAuth);
-  return auth !== AuthorizationStatus.Auth ? SignIn() : SignOut();
+  return auth !== AuthorizationStatus.Auth ? <SignIn /> : <SignOut/>;
 };
 
 export default SignInOut;
