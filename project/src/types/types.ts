@@ -16,6 +16,19 @@ export type Host = {
   name: string
 }
 
+export type AuthData = {
+  email: string
+  password:string
+}
+
+export type UserData = AuthData & {
+  token:string
+}
+
+export type AuthError = {
+  error: string,
+}
+
 export type Offer = {
   bedrooms: number
   city: City
