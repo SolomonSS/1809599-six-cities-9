@@ -10,8 +10,8 @@ function SignOut (){
   const email = useSelector(getEmail);
   const dispatch = useAppDispatch();
   const onClick = () => {
-    dispatch(logoutAction);
-  }
+    dispatch(logoutAction());
+  };
   return(
     <Fragment>
       <li className="header__nav-item user">
@@ -22,7 +22,7 @@ function SignOut (){
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link className="header__nav-link" to="/">
+        <Link className="header__nav-link" to="">
           <span className="header__signout" onClick={onClick}>Sign out</span>
         </Link>
       </li>

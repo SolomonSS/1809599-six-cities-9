@@ -48,6 +48,7 @@ export const logoutAction = createAsyncThunk(
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
       store.dispatch(setEmail(null));
+      store.dispatch(redirectToRoute(AppRoute.Main));
     } catch (error) {
       errorHandle(error);
     }

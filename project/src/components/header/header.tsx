@@ -1,13 +1,7 @@
 import {Link} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks';
-import {logoutAction} from '../../services/api-actions';
 import SignInOut from '../sign-in-out/sign-in-out';
 
 function Header(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const onClick = () =>{
-    dispatch(logoutAction());
-  };
   return (
     <header className="header">
       <div className="container">
