@@ -8,12 +8,14 @@ import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
 import {comments} from '../../mocks/comments';
+import {getOffer} from '../../services/api-actions';
 
 function Property({offers}: AppScreenProps) {
   const {id: propertyId} = useParams();
   const [activeCard, setActiveCard] = useState<number| null>(Number(propertyId));
   const handleOnMouseOver = (cardId:number|null)=>setActiveCard(cardId);
-
+  const offer = getOffer(Number(propertyId));
+  console.log(offer);
   const property = offers.find((offer) => offer.id.toString() === propertyId);
   if(!property){
     return <MainScreenEmpty/>;

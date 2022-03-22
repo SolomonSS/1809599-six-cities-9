@@ -54,3 +54,16 @@ export const logoutAction = createAsyncThunk(
     }
   },
 );
+
+export const getOffer = createAsyncThunk(
+  'data/loadOffer',
+  async (id: number)=>{
+    try {
+      return await api.get<Offer>(`${APIRoute.OFFERS}/${id}`).then((response)=>
+      console.log(response));
+    }
+    catch (err){
+      errorHandle(err);
+    }
+  }
+)
