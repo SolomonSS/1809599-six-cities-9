@@ -8,19 +8,22 @@ import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
 import {comments} from '../../mocks/comments';
-import {getOffer} from '../../services/api-actions';
+import {completeOffer} from '../../services/api-actions';
+import {useSelector} from 'react-redux';
+import {getCurrentOffer} from '../../store/selectors';
+import {store} from '../../store';
 
 function Property({offers}: AppScreenProps) {
   const {id: propertyId} = useParams();
   const [activeCard, setActiveCard] = useState<number| null>(Number(propertyId));
   const handleOnMouseOver = (cardId:number|null)=>setActiveCard(cardId);
-  const offer = getOffer(Number(propertyId));
-  console.log(offer);
-  const property = offers.find((offer) => offer.id.toString() === propertyId);
-  if(!property){
+  store.dispatch(completeOffer(Number(propertyId)));
+  const offer = useSelector(getCurrentOffer);
+
+  if(!offer){
     return <MainScreenEmpty/>;
   }
-  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = property;
+  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
 
   return (
     <Fragment>

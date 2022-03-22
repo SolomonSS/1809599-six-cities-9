@@ -4,7 +4,7 @@ import {AuthData, Offer, UserData} from '../types/types';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../utils/const';
 import {store} from '../store';
 import {errorHandle} from './error-handle';
-import {loadOffers, redirectToRoute, requireAuthorization, setEmail} from '../store/action';
+import {loadOffer, loadOffers, redirectToRoute, requireAuthorization, setEmail} from '../store/action';
 import {dropToken, saveToken} from './token';
 
 export const completeOffers = createAsyncThunk('data/fetchOffers', async () => {
@@ -55,12 +55,12 @@ export const logoutAction = createAsyncThunk(
   },
 );
 
-export const getOffer = createAsyncThunk(
+export const completeOffer = createAsyncThunk(
   'data/loadOffer',
   async (id: number)=>{
     try {
-      return await api.get<Offer>(`${APIRoute.OFFERS}/${id}`).then((response)=>
-      console.log(response));
+      const {data} = await api.get<Offer>(`${APIRoute.OFFERS}/${id}`);
+      store.dispatch(loadOffer(data));
     }
     catch (err){
       errorHandle(err);

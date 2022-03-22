@@ -7,3 +7,4 @@ export const loadOffers = createAction<Offer[]>('data/loadOffers');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/authorization');
 export const setEmail = createAction<string | null>('user/email');
 export const redirectToRoute = createAction<AppRoute>('page/redirectToRoute');
+export const loadOffer = createAction<Offer>('data/loadOffer');
