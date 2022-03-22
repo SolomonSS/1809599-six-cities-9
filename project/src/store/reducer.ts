@@ -9,7 +9,6 @@ const initialState: InitialState = {
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   email: null,
-  currentOffer: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {

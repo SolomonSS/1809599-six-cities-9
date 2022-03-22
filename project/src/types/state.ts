@@ -13,5 +13,5 @@ export type InitialState = {
   authorizationStatus: AuthorizationStatus
   isDataLoaded: boolean
   email: string | null
-  currentOffer: Offer | null
+  currentOffer?: Offer
 };
