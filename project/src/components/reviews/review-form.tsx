@@ -30,7 +30,7 @@ const Stars = [
 function ReviewForm(){
   const [inputRating, setInputRating] = useState(0);
   const [inputComment, setInputComment] = useState('');
-  const offerId = +useParams();
+  const {id: propertyId} = useParams();
 
   const handleStarsChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = +evt.target.value;
@@ -44,10 +44,10 @@ function ReviewForm(){
     const newComment: NewComment = {
       comment: inputComment,
       rating: +inputRating,
-      id: offerId,
+      id: Number(propertyId),
     };
     dispatch(postReview(newComment));
-    dispatch(completeComments(offerId));
+    dispatch(completeComments(Number(propertyId)));
   };
 
   return (
@@ -70,7 +70,7 @@ function ReviewForm(){
           To submit review please make sure to set <span className="reviews__star">rating</span> and
           describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" >Submit</button>
+        <button className="reviews__submit form__submit button" type="submit">Submit</button>
       </div>
     </form>
   );
