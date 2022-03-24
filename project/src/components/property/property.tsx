@@ -1,28 +1,36 @@
-import {AppScreenProps} from '../../types/types';
 import Reviews from '../reviews/reviews';
 import {useParams} from 'react-router-dom';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
-import {Fragment, useState} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import Header from '../header/header';
 import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
-import {comments} from '../../mocks/comments';
-import {completeOffer} from '../../services/api-actions';
+import {completeComments, completeNearbyOffers, completeOffer} from '../../services/api-actions';
 import {useSelector} from 'react-redux';
-import {getCurrentOffer} from '../../store/selectors';
+import {getCurrentOffer, getNearby, getReviews} from '../../store/selectors';
 import {store} from '../../store';
 
-function Property({offers}: AppScreenProps) {
-  const {id: propertyId} = useParams();
-  const [activeCard, setActiveCard] = useState<number| null>(Number(propertyId));
-  const handleOnMouseOver = (cardId:number|null)=>setActiveCard(cardId);
-  store.dispatch(completeOffer(Number(propertyId)));
-  const offer = useSelector(getCurrentOffer);
 
-  if(!offer){
+function Property() {
+  const offer = useSelector(getCurrentOffer);
+  const reviews = useSelector(getReviews);
+  const nearbyOffers = useSelector(getNearby);
+
+  const {id: propertyId} = useParams();
+  const [activeCard, setActiveCard] = useState<number | null>(Number(propertyId));
+  const handleOnMouseOver = (cardId: number | null) => setActiveCard(cardId);
+
+  useEffect(() => {
+    store.dispatch(completeOffer(Number(propertyId)));
+    store.dispatch(completeNearbyOffers(Number(propertyId)));
+    store.dispatch(completeComments(Number(propertyId)));
+  }, [propertyId]);
+
+  if (!offer) {
     return <MainScreenEmpty/>;
   }
+
   const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
 
   return (
@@ -53,7 +61,7 @@ function Property({offers}: AppScreenProps) {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: rating}}></span>
+                  <span style={{width: `${rating * 100}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -66,7 +74,7 @@ function Property({offers}: AppScreenProps) {
                   {bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                Max {maxAdults} adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -77,7 +85,7 @@ function Property({offers}: AppScreenProps) {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   <li className="property__inside-item">
-                  Wi-Fi
+                    Wi-Fi
                   </li>
                   {goods.map((good) => (
                     <li className="property__inside-item" key={id + good}>
@@ -101,12 +109,12 @@ function Property({offers}: AppScreenProps) {
                   </p>
                 </div>
               </div>
-              <Reviews reviews={comments}/>
+              <Reviews reviews={reviews}/>
             </div>
           </div>
-          <Map city={offers[0].city} offers={offers} selectedOffer={activeCard} mode={MapMods.Property}/>
+          <Map city={nearbyOffers[0].city} offers={nearbyOffers.concat(offer)} selectedOffer={activeCard} mode={MapMods.Property}/>
         </section>
-        <OtherPlaces offers={offers} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
+        <OtherPlaces offers={nearbyOffers} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
       </main>
     </Fragment>
   );

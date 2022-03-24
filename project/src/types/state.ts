@@ -1,6 +1,5 @@
 import {store} from '../store';
-
-import {Offer} from './types';
+import {Offer, ReviewItem} from './types';
 import {AuthorizationStatus} from '../utils/const';
 
 export type State = ReturnType<typeof store.getState>;
@@ -13,5 +12,7 @@ export type InitialState = {
   authorizationStatus: AuthorizationStatus
   isDataLoaded: boolean
   email: string | null
-  currentOffer?: Offer
+  reviews: ReviewItem[]
+  currentOffer: Offer | null
+  nearbyOffers: Offer[]
 };

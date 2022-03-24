@@ -35,7 +35,7 @@ function App(): JSX.Element {
         }
         />
         <Route path={AppRoute.Login} element={<Login/>}/>
-        <Route path={`${AppRoute.Room}:id`} element={<Property offers={offers}/>}/>
+        <Route path={`${AppRoute.Room}:id`} element={<Property />}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
     </HistoryRouter>);

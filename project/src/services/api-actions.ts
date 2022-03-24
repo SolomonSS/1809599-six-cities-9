@@ -1,10 +1,18 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api} from './api';
-import {AuthData, Offer, UserData} from '../types/types';
+import {AuthData, Offer, NewComment, ReviewItem, UserData, CommentData} from '../types/types';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../utils/const';
 import {store} from '../store';
 import {errorHandle} from './error-handle';
-import {loadOffer, loadOffers, redirectToRoute, requireAuthorization, setEmail} from '../store/action';
+import {
+  loadComments,
+  loadNearby,
+  loadOffer,
+  loadOffers,
+  redirectToRoute,
+  requireAuthorization,
+  setEmail
+} from '../store/action';
 import {dropToken, saveToken} from './token';
 
 export const completeOffers = createAsyncThunk('data/fetchOffers', async () => {
@@ -65,5 +73,42 @@ export const completeOffer = createAsyncThunk(
     catch (err){
       errorHandle(err);
     }
-  }
-)
+  },
+);
+
+export const completeNearbyOffers = createAsyncThunk(
+  'data/loadOffer',
+  async (id: number)=>{
+    try {
+      const {data} = await api.get<Offer[]>(`${APIRoute.OFFERS}/${id}/nearby`);
+      store.dispatch(loadNearby(data));
+    }
+    catch (err){
+      errorHandle(err);
+    }
+  },
+);
+
+export const completeComments = createAsyncThunk(
+  'data/loadComments',
+  async (id:number)=>{
+    try{
+      const {data} = await api.get<ReviewItem[]>(`${APIRoute.COMMENTS}/${id}`);
+      store.dispatch(loadComments(data));
+    } catch (err){
+      errorHandle(err);
+    }
+  },
+);
+
+export const postReview = createAsyncThunk(
+  'data/postReview',
+  async (newComment: NewComment)=>{
+    try{
+      await api.post<CommentData>(`${APIRoute.COMMENTS}/${newComment.id}`, {newComment});
+      store.dispatch(postReview(newComment));
+    }catch (err) {
+      errorHandle(err);
+    }
+  },
+);
