@@ -3,6 +3,9 @@ import {NewComment} from '../../types/types';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {completeComments, postReview} from '../../services/api-actions';
+import {submitingComment} from '../../store/action';
+import {useSelector} from 'react-redux';
+import {getSubmiting} from '../../store/selectors';
 
 const Stars = [
   {
@@ -31,14 +34,20 @@ function ReviewForm(){
   const [inputRating, setInputRating] = useState(0);
   const [inputComment, setInputComment] = useState('');
   const {id: propertyId} = useParams();
+  const isSubmiting = useSelector(getSubmiting);
 
   const handleStarsChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = +evt.target.value;
     setInputRating(value);
   };
 
+  const resetForm = () =>{
+    setInputRating(0);
+    setInputComment('');
+  };
+
   const dispatch = useAppDispatch();
-  //const isDisabled: boolean = inputRating === 0 || inputComment.length < 50;
+  const isDisabled: boolean = inputRating === 0 || inputComment.length < 50 || isSubmiting;
   const handleOnSubmit = (evt: FormEvent<HTMLFormElement>)=> {
     evt.preventDefault();
     const newComment: NewComment = {
@@ -46,8 +55,10 @@ function ReviewForm(){
       rating: +inputRating,
       id: Number(propertyId),
     };
+    dispatch(submitingComment(true));
     dispatch(postReview(newComment));
     dispatch(completeComments(Number(propertyId)));
+    resetForm();
   };
 
   return (
@@ -70,7 +81,7 @@ function ReviewForm(){
           To submit review please make sure to set <span className="reviews__star">rating</span> and
           describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit">Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isDisabled}>Submit</button>
       </div>
     </form>
   );

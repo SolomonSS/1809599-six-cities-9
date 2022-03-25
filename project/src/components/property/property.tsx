@@ -1,6 +1,5 @@
 import Reviews from '../reviews/reviews';
 import {useParams} from 'react-router-dom';
-import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
 import {Fragment, useEffect, useState} from 'react';
 import Header from '../header/header';
 import Map from '../map/map';
@@ -10,6 +9,7 @@ import {completeComments, completeNearbyOffers, completeOffer} from '../../servi
 import {useSelector} from 'react-redux';
 import {getCurrentOffer, getNearby, getReviews} from '../../store/selectors';
 import {store} from '../../store';
+import NotFound from '../not-found/not-found';
 
 
 function Property() {
@@ -28,7 +28,7 @@ function Property() {
   }, [propertyId]);
 
   if (!offer) {
-    return <MainScreenEmpty/>;
+    return <NotFound/>;
   }
 
   const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;

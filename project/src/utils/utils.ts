@@ -21,3 +21,4 @@ const sortByPriceHL = (offerA:Offer, offerB:Offer)=>offerB.price-offerA.price;
 const sortByRating = (offerA:Offer, offerB:Offer)=>offerB.rating-offerA.rating;
 
 export default sortOffers;
+

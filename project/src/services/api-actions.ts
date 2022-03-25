@@ -11,7 +11,7 @@ import {
   loadOffers,
   redirectToRoute,
   requireAuthorization,
-  setEmail
+  setEmail, submitingComment
 } from '../store/action';
 import {dropToken, saveToken} from './token';
 
@@ -105,8 +105,9 @@ export const postReview = createAsyncThunk(
   'data/postReview',
   async (newComment: NewComment)=>{
     try{
-      await api.post<CommentData>(`${APIRoute.COMMENTS}/${newComment.id}`, {newComment});
-      store.dispatch(postReview(newComment));
+      const {comment, rating, id} = newComment;
+      await api.post<CommentData>(`${APIRoute.COMMENTS}/${id}`, {comment, rating});
+      store.dispatch(submitingComment(false));
     }catch (err) {
       errorHandle(err);
     }

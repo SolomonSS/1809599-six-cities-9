@@ -8,3 +8,4 @@ export const getEmail = (state:State)=>state.email;
 export const getCurrentOffer = (state:State)=>state.currentOffer;
 export const getNearby = (state:State)=>state.nearbyOffers;
 export const getReviews = (state:State)=>state.reviews;
+export const getSubmiting = (state: State)=>state.isSubmiting;

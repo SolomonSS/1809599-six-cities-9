@@ -15,4 +15,5 @@ export type InitialState = {
   reviews: ReviewItem[]
   currentOffer: Offer | null
   nearbyOffers: Offer[]
+  isSubmiting: boolean
 };
