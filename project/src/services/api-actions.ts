@@ -1,10 +1,18 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api} from './api';
-import {AuthData, Offer, UserData} from '../types/types';
+import {AuthData, Offer, NewComment, ReviewItem, UserData, CommentData} from '../types/types';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../utils/const';
 import {store} from '../store';
 import {errorHandle} from './error-handle';
-import {loadOffers, redirectToRoute, requireAuthorization, setEmail} from '../store/action';
+import {
+  loadComments,
+  loadNearby,
+  loadOffer,
+  loadOffers,
+  redirectToRoute,
+  requireAuthorization,
+  setEmail, submitingComment
+} from '../store/action';
 import {dropToken, saveToken} from './token';
 
 export const completeOffers = createAsyncThunk('data/fetchOffers', async () => {
@@ -51,6 +59,57 @@ export const logoutAction = createAsyncThunk(
       store.dispatch(redirectToRoute(AppRoute.Main));
     } catch (error) {
       errorHandle(error);
+    }
+  },
+);
+
+export const completeOffer = createAsyncThunk(
+  'data/loadOffer',
+  async (id: number)=>{
+    try {
+      const {data} = await api.get<Offer>(`${APIRoute.OFFERS}/${id}`);
+      store.dispatch(loadOffer(data));
+    }
+    catch (err){
+      errorHandle(err);
+    }
+  },
+);
+
+export const completeNearbyOffers = createAsyncThunk(
+  'data/loadOffer',
+  async (id: number)=>{
+    try {
+      const {data} = await api.get<Offer[]>(`${APIRoute.OFFERS}/${id}/nearby`);
+      store.dispatch(loadNearby(data));
+    }
+    catch (err){
+      errorHandle(err);
+    }
+  },
+);
+
+export const completeComments = createAsyncThunk(
+  'data/loadComments',
+  async (id:number)=>{
+    try{
+      const {data} = await api.get<ReviewItem[]>(`${APIRoute.COMMENTS}/${id}`);
+      store.dispatch(loadComments(data));
+    } catch (err){
+      errorHandle(err);
+    }
+  },
+);
+
+export const postReview = createAsyncThunk(
+  'data/postReview',
+  async (newComment: NewComment)=>{
+    try{
+      const {comment, rating, id} = newComment;
+      await api.post<CommentData>(`${APIRoute.COMMENTS}/${id}`, {comment, rating});
+      store.dispatch(submitingComment(false));
+    }catch (err) {
+      errorHandle(err);
     }
   },
 );

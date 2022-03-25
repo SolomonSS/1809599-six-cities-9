@@ -5,3 +5,7 @@ export const getOffers = (state:State) => state.offers.filter((offer)=>offer.cit
 export const getStatus = (state:State) => state.isDataLoaded;
 export const checkAuth = (state:State)=> state.authorizationStatus;
 export const getEmail = (state:State)=>state.email;
+export const getCurrentOffer = (state:State)=>state.currentOffer;
+export const getNearby = (state:State)=>state.nearbyOffers;
+export const getReviews = (state:State)=>state.reviews;
+export const getSubmiting = (state: State)=>state.isSubmiting;

@@ -1,7 +1,7 @@
-import {Comment} from '../../types/types';
+import {ReviewItem} from '../../types/types';
 
 type PropsType ={
-  review:Comment
+  review:ReviewItem
 };
 
 function Review({review}:PropsType) {
@@ -21,7 +21,7 @@ function Review({review}:PropsType) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: rating}}></span>
+            <span style={{width: `${rating*20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

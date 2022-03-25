@@ -25,10 +25,6 @@ export type UserData = AuthData & {
   token:string
 }
 
-export type AuthError = {
-  error: string,
-}
-
 export type Offer = {
   bedrooms: number
   city: City
@@ -46,10 +42,14 @@ export type Offer = {
   rating: number
   title: string
   type: string
-  comments: Comment[]
 };
 
-export type Comment = {
+export type CommentData = Pick<ReviewItem, 'comment' | 'rating'>;
+export type NewComment = CommentData & {
+  id: number
+};
+
+export type ReviewItem = {
   comment: string
   date: string
   id: number

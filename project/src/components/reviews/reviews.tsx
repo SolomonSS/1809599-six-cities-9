@@ -1,4 +1,4 @@
-import {Comment} from '../../types/types';
+import {ReviewItem} from '../../types/types';
 import Review from './review';
 import ReviewForm from './review-form';
 import {useSelector} from 'react-redux';
@@ -6,7 +6,7 @@ import {checkAuth} from '../../store/selectors';
 import {AuthorizationStatus} from '../../utils/const';
 
 type ReviewsProps = {
-  reviews: Comment[]
+  reviews: ReviewItem[]
 };
 
 function Reviews({reviews}: ReviewsProps) {
