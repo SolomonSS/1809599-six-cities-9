@@ -66,4 +66,4 @@ function Login() {
 }
 
 export default Login;
-/*onClick={()=>navigate(AppRoute.Main)}**/
+

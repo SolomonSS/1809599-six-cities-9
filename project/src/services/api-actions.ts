@@ -4,16 +4,11 @@ import {AuthData, Offer, NewComment, ReviewItem, UserData, CommentData} from '..
 import {APIRoute, AppRoute, AuthorizationStatus} from '../utils/const';
 import {store} from '../store';
 import {errorHandle} from './error-handle';
-import {
-  loadComments,
-  loadNearby,
-  loadOffer,
-  loadOffers,
-  redirectToRoute,
-  requireAuthorization,
-  setEmail, submitingComment
-} from '../store/action';
+import {redirectToRoute} from '../store/action';
 import {dropToken, saveToken} from './token';
+import {loadComments, loadNearby, loadOffer, loadOffers} from '../store/reducers/data/data-process';
+import {requireAuthorization} from '../store/reducers/user-process/user-process';
+import {setEmail, submitingComment} from '../store/reducers/surf-process/surf-process';
 
 export const completeOffers = createAsyncThunk('data/fetchOffers', async () => {
   try {

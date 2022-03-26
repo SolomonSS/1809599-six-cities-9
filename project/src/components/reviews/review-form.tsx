@@ -1,11 +1,9 @@
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import {NewComment} from '../../types/types';
 import {useParams} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {completeComments, postReview} from '../../services/api-actions';
-import {submitingComment} from '../../store/action';
-import {useSelector} from 'react-redux';
-import {getSubmiting} from '../../store/selectors';
+import {submitingComment} from '../../store/reducers/surf-process/surf-process';
 
 const Stars = [
   {
@@ -35,7 +33,7 @@ function ReviewForm(){
   const [inputRating, setInputRating] = useState(0);
   const [inputComment, setInputComment] = useState('');
   const {id: propertyId} = useParams();
-  const isSubmiting = useSelector(getSubmiting);
+  const {isSubmiting} = useAppSelector((({SURF}) => SURF));
 
   const resetForm = () =>{
     setInputRating(0);

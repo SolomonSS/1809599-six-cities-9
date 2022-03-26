@@ -1,13 +1,11 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../../utils/const';
 import {Fragment} from 'react';
-import {useSelector} from 'react-redux';
-import {getEmail} from '../../../store/selectors';
-import {useAppDispatch} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {logoutAction} from '../../../services/api-actions';
 
 function SignOut (){
-  const email = useSelector(getEmail);
+  const {email} = useAppSelector((({SURF}) => SURF));
   const dispatch = useAppDispatch();
   const onClick = () => {
     dispatch(logoutAction());

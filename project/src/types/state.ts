@@ -6,14 +6,20 @@ export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type InitialState = {
-  city: string
-  offers: Offer[]
-  authorizationStatus: AuthorizationStatus
-  isDataLoaded: boolean
+export type SurfProcess = {
+  activeCity: string
   email: string | null
+  isSubmiting: boolean
+};
+
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus
+};
+
+export type DataProcess = {
+  offers: Offer[]
   reviews: ReviewItem[]
   currentOffer: Offer | null
   nearbyOffers: Offer[]
-  isSubmiting: boolean
-};
+  isDataLoaded: boolean
+}

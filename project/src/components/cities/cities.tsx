@@ -1,12 +1,10 @@
 import {CitiesList} from '../../utils/const';
 import CityItem from './city/city-item';
-import {useSelector} from 'react-redux';
-import {getCity} from '../../store/selectors';
-import {useAppDispatch} from '../../hooks';
-import {changeCity} from '../../store/action';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {changeCity} from '../../store/reducers/surf-process/surf-process';
 
 function Cities() {
-  const activeCity = useSelector(getCity);
+  const {activeCity} = useAppSelector((({SURF}) => SURF));
   const dispatch = useAppDispatch();
   const handleChangeCity = (city:string) => dispatch(changeCity({city}));
   return (

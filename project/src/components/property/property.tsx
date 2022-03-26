@@ -6,16 +6,13 @@ import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
 import {completeComments, completeNearbyOffers, completeOffer} from '../../services/api-actions';
-import {useSelector} from 'react-redux';
-import {getCurrentOffer, getNearby, getReviews} from '../../store/selectors';
 import {store} from '../../store';
 import NotFound from '../not-found/not-found';
+import {useAppSelector} from '../../hooks';
 
 
 function Property() {
-  const offer = useSelector(getCurrentOffer);
-  const reviews = useSelector(getReviews);
-  const nearbyOffers = useSelector(getNearby);
+  const {currentOffer, reviews, nearbyOffers} = useAppSelector((({DATA}) => DATA));
 
   const {id: propertyId} = useParams();
   const [activeCard, setActiveCard] = useState<number | null>(Number(propertyId));
@@ -27,11 +24,11 @@ function Property() {
     store.dispatch(completeComments(Number(propertyId)));
   }, [propertyId, reviews]);
 
-  if (!offer) {
+  if (!currentOffer) {
     return <NotFound/>;
   }
 
-  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
+  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = currentOffer;
 
   return (
     <Fragment>
@@ -112,7 +109,7 @@ function Property() {
               <Reviews reviews={reviews}/>
             </div>
           </div>
-          <Map city={nearbyOffers[0].city} offers={nearbyOffers.concat(offer)} selectedOffer={activeCard} mode={MapMods.Property}/>
+          <Map city={nearbyOffers[0].city} offers={nearbyOffers.concat(currentOffer)} selectedOffer={activeCard} mode={MapMods.Property}/>
         </section>
         <OtherPlaces offers={nearbyOffers} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
       </main>
