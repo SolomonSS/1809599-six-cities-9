@@ -25,7 +25,7 @@ function Property() {
     store.dispatch(completeOffer(Number(propertyId)));
     store.dispatch(completeNearbyOffers(Number(propertyId)));
     store.dispatch(completeComments(Number(propertyId)));
-  }, [propertyId]);
+  }, [propertyId, reviews]);
 
   if (!offer) {
     return <NotFound/>;
