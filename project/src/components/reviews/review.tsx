@@ -1,4 +1,5 @@
 import {ReviewItem} from '../../types/types';
+import React from 'react';
 
 type PropsType ={
   review:ReviewItem
@@ -34,4 +35,4 @@ function Review({review}:PropsType) {
   );
 }
 
-export default Review;
+export default React.memo(Review);

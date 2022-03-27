@@ -1,17 +1,16 @@
 import {ReviewItem} from '../../types/types';
 import Review from './review';
 import ReviewForm from './review-form';
-import {useSelector} from 'react-redux';
-import {checkAuth} from '../../store/selectors';
 import {AuthorizationStatus} from '../../utils/const';
+import {useAppSelector} from '../../hooks';
 
 type ReviewsProps = {
   reviews: ReviewItem[]
 };
 
 function Reviews({reviews}: ReviewsProps) {
-  const auth = useSelector(checkAuth);
-  const reviewForm = auth === AuthorizationStatus.Auth ? <ReviewForm/> : null;
+  const {authorizationStatus} = useAppSelector((({USER}) => USER));
+  const reviewForm = authorizationStatus === AuthorizationStatus.Auth ? <ReviewForm/> : null;
   if(reviews){
     return (
       <section className="property__reviews reviews">

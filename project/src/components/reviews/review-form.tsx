@@ -1,11 +1,9 @@
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import {NewComment} from '../../types/types';
 import {useParams} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {completeComments, postReview} from '../../services/api-actions';
-import {submitingComment} from '../../store/action';
-import {useSelector} from 'react-redux';
-import {getSubmiting} from '../../store/selectors';
+import {submitingComment} from '../../store/reducers/surf-process/surf-process';
 
 const Stars = [
   {
@@ -31,22 +29,22 @@ const Stars = [
 ];
 
 function ReviewForm(){
+  const dispatch = useAppDispatch();
   const [inputRating, setInputRating] = useState(0);
   const [inputComment, setInputComment] = useState('');
   const {id: propertyId} = useParams();
-  const isSubmiting = useSelector(getSubmiting);
-
-  const handleStarsChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const value = +evt.target.value;
-    setInputRating(value);
-  };
+  const {isSubmiting} = useAppSelector((({SURF}) => SURF));
 
   const resetForm = () =>{
     setInputRating(0);
     setInputComment('');
   };
 
-  const dispatch = useAppDispatch();
+  const handleStarsChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const value = +evt.target.value;
+    setInputRating(value);
+  };
+
   const isDisabled: boolean = inputRating === 0 || inputComment.length < 50 || isSubmiting;
   const handleOnSubmit = (evt: FormEvent<HTMLFormElement>)=> {
     evt.preventDefault();
@@ -75,7 +73,7 @@ function ReviewForm(){
             </label>
           </Fragment>))}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={({target}) => setInputComment(target.value)} value={inputComment}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" disabled={isSubmiting} onChange={({target}) => setInputComment(target.value)} value={inputComment}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and

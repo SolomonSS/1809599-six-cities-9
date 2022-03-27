@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import React from 'react';
 
 type Props = {
   city:string,
@@ -17,4 +18,4 @@ function CityItem ({city, activeCity, handleChangeCity}:Props):JSX.Element {
     </li>
   );
 }
-export default CityItem;
+export default React.memo(CityItem, (prevProps, nextProps)=>prevProps.activeCity ===nextProps.activeCity);

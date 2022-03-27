@@ -5,20 +5,18 @@ import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import Property from '../property/property';
 import PrivateRoute from '../private-route';
-import {checkAuth, getOffers, getStatus} from '../../store/selectors';
-import {useSelector} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import HistoryRouter from '../../history/history-route';
 import browserHistory from '../../history';
 import NotFound from '../not-found/not-found';
+import {useAppSelector} from '../../hooks';
 
 
 function App(): JSX.Element {
-  const offers = useSelector(getOffers);
-  const status = useSelector(getStatus);
-  const authStatus = useSelector(checkAuth);
+  const {offers, isDataLoaded} = useAppSelector((({DATA}) => DATA));
+  const {authorizationStatus} = useAppSelector((({USER}) => USER));
 
-  if(!status){
+  if(!isDataLoaded){
     return (
       <LoadingScreen />
     );
@@ -29,7 +27,7 @@ function App(): JSX.Element {
       <Routes>
         <Route index element={<MainScreen/>}/>
         <Route path={AppRoute.Favorites} element={
-          <PrivateRoute authorization={authStatus}>
+          <PrivateRoute authorization={authorizationStatus}>
             <Favorites offers={offers}/>
           </PrivateRoute>
         }

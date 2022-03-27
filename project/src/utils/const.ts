@@ -48,3 +48,10 @@ export enum SortTypes {
 }
 
 export const ActiveSortClass = 'places__option--active';
+
+export enum NameSpace {
+  data = 'DATA',
+  surf = 'SURF',
+  user = 'USER',
+}
+

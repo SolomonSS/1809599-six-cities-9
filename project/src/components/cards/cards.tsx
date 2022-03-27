@@ -1,5 +1,5 @@
 import {Offer} from '../../types/types';
-import {Fragment} from 'react';
+import React, {Fragment} from 'react';
 import Card from '../card/card';
 
 type CardsProps = {
@@ -17,4 +17,4 @@ function Cards({offers, handleOnMouseOver, mode}: CardsProps) {
     </Fragment>);
 }
 
-export default Cards;
+export default React.memo(Cards, (prevProps, nextProps)=>prevProps.offers === nextProps.offers);

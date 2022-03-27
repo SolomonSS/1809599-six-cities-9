@@ -1,6 +1,7 @@
 import {Offer} from '../../types/types';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../utils/const';
+import React from 'react';
 
 type CardProps = {
   offer: Offer,
@@ -46,4 +47,4 @@ function Card({offer, handleOnMouseOver = () => void 0, mode}:CardProps):JSX.Ele
   );
 }
 
-export default Card;
+export default React.memo(Card, (prevProp, nextProp)=>prevProp.offer===nextProp.offer);
