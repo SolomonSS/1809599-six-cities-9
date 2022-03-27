@@ -13,7 +13,7 @@ import {useAppSelector} from '../../hooks';
 
 
 function App(): JSX.Element {
-  const {offers, isDataLoaded} = useAppSelector((({DATA}) => DATA));
+  const {isDataLoaded} = useAppSelector((({DATA}) => DATA));
   const {authorizationStatus} = useAppSelector((({USER}) => USER));
 
   if(!isDataLoaded){
@@ -28,7 +28,7 @@ function App(): JSX.Element {
         <Route index element={<MainScreen/>}/>
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute authorization={authorizationStatus}>
-            <Favorites offers={offers}/>
+            <Favorites/>
           </PrivateRoute>
         }
         />

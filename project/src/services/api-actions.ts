@@ -1,12 +1,19 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api} from './api';
-import {AuthData, Offer, NewComment, ReviewItem, UserData, CommentData} from '../types/types';
+import {AuthData, Offer, NewComment, ReviewItem, UserData, CommentData, ChangeStatus} from '../types/types';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../utils/const';
 import {store} from '../store';
 import {errorHandle} from './error-handle';
 import {redirectToRoute} from '../store/action';
 import {dropToken, saveToken} from './token';
-import {loadComments, loadNearby, loadOffer, loadOffers} from '../store/reducers/data/data-process';
+import {
+  loadComments,
+  loadFavorites,
+  loadNearby,
+  loadOffer,
+  loadOffers,
+  updateOffer
+} from '../store/reducers/data/data-process';
 import {requireAuthorization} from '../store/reducers/user-process/user-process';
 import {setEmail, submitingComment} from '../store/reducers/surf-process/surf-process';
 
@@ -104,6 +111,32 @@ export const postReview = createAsyncThunk(
       await api.post<CommentData>(`${APIRoute.COMMENTS}/${id}`, {comment, rating});
       store.dispatch(submitingComment(false));
     }catch (err) {
+      errorHandle(err);
+    }
+  },
+);
+
+export const changeStatus = createAsyncThunk(
+  'data/changeFavorite',
+  async ({id,status}:ChangeStatus)=>{
+    try {
+      const {data} = await api.post(`${APIRoute.FAVORITES}/${id}/${status}`);
+      store.dispatch(updateOffer(data));
+    }
+    catch(err){
+      errorHandle(err);
+    }
+  },
+);
+
+export const completeFavoriteOffers = createAsyncThunk(
+  'data/completeFavorites',
+  async ()=>{
+    try {
+      const {data} = await api.get(APIRoute.FAVORITES);
+      store.dispatch(loadFavorites(data));
+    }
+    catch(err){
       errorHandle(err);
     }
   },

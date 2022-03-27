@@ -1,19 +1,36 @@
-import {Offer} from '../../types/types';
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../utils/const';
+import {ChangeStatus, Offer} from '../../types/types';
+import {Link, useNavigate} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus, FavoriteStatusButton} from '../../utils/const';
 import React from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {changeStatus} from '../../services/api-actions';
 
 type CardProps = {
   offer: Offer,
-  handleOnMouseOver?: (id: number| null) => void,
+  handleOnMouseOver?: (id: number | null) => void,
   mode: string
 };
 
-function Card({offer, handleOnMouseOver = () => void 0, mode}:CardProps):JSX.Element {
-  const {type, previewImage, price, rating, title, id} = offer;
+function Card({offer, handleOnMouseOver = () => void 0, mode}: CardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
+  const {type, previewImage, price, rating, title, id, isFavorite} = offer;
+  const isFavoriteStatus = isFavorite ? FavoriteStatusButton : '';
+  const handleChangeStatus = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      const statusData: ChangeStatus = {
+        id: id,
+        status: Number(!isFavorite),
+      };
+      dispatch(changeStatus(statusData));
+    } else {
+      navigate(AppRoute.Login);
+    }
+  };
   return (
-    <article className={`${mode} place-card`} onMouseOver={()=>handleOnMouseOver(id)} onMouseLeave={()=>handleOnMouseOver(null)}>
+    <article className={`${mode} place-card`} onMouseOver={() => handleOnMouseOver(id)} onMouseLeave={() => handleOnMouseOver(null)}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
@@ -25,16 +42,16 @@ function Card({offer, handleOnMouseOver = () => void 0, mode}:CardProps):JSX.Ele
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button className={`place-card__bookmark-button button ${isFavoriteStatus}`} type="button" onClick={handleChangeStatus}>
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className="visually-hidden">In bookmarks</span>
+            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating*20}%`}}></span>
+            <span style={{width: `${rating * 20}%`}}></span>
             <span className="visually-hidden">Rating {rating}</span>
           </div>
         </div>
@@ -47,4 +64,4 @@ function Card({offer, handleOnMouseOver = () => void 0, mode}:CardProps):JSX.Ele
   );
 }
 
-export default React.memo(Card, (prevProp, nextProp)=>prevProp.offer===nextProp.offer);
+export default Card;

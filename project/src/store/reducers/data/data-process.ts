@@ -1,6 +1,6 @@
-import {DataProcess} from "../../../types/state";
-import {createSlice} from "@reduxjs/toolkit";
-import {NameSpace} from "../../../utils/const";
+import {DataProcess} from '../../../types/state';
+import {createSlice} from '@reduxjs/toolkit';
+import {NameSpace} from '../../../utils/const';
 
 const initialState: DataProcess = {
   currentOffer: null,
@@ -8,6 +8,7 @@ const initialState: DataProcess = {
   reviews: [],
   nearbyOffers: [],
   isDataLoaded: false,
+  favoriteOffers: []
 };
 
 export const dataProcess = createSlice({
@@ -27,7 +28,15 @@ export const dataProcess = createSlice({
     loadNearby: (state, action) => {
       state.nearbyOffers = action.payload;
     },
+    updateOffer: (state, action) => {
+      const {id} = action.payload;
+      const index = state.offers.findIndex((offer)=>offer.id === id);
+      state.offers[index].isFavorite = action.payload.isFavorite;
+    },
+    loadFavorites: (state, action) => {
+      state.favoriteOffers = action.payload;
+    },
   },
-})
+});
 
-export const {loadOffers, loadOffer, loadComments, loadNearby} = dataProcess.actions;
+export const {loadOffers, loadOffer, loadComments, loadNearby, updateOffer, loadFavorites} = dataProcess.actions;

@@ -1,6 +1,6 @@
-import {UserProcess} from "../../../types/state";
-import {AuthorizationStatus, NameSpace} from "../../../utils/const";
-import {createSlice} from "@reduxjs/toolkit";
+import {UserProcess} from '../../../types/state';
+import {AuthorizationStatus, NameSpace} from '../../../utils/const';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState:UserProcess ={
   authorizationStatus: AuthorizationStatus.Unknown,

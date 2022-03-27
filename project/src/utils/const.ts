@@ -19,6 +19,7 @@ export enum MapMods{
 export enum CardMods {
   Main = 'cities__place-card',
   Property = 'near-places__card',
+  Favorite = 'favorites__card',
 }
 
 export const DEFAULT_CITY = 'Paris';
@@ -28,7 +29,6 @@ export const CitiesList = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg
 export enum APIRoute {
   OFFERS = '/hotels',
   FAVORITES = '/favorite',
-  CHANGE_FAVORITES_STATUS = '/favorite/{hotelId}/{status}',
   COMMENTS = '/comments',
   LOGIN = '/login',
   LOGOUT = '/logout',
@@ -48,10 +48,10 @@ export enum SortTypes {
 }
 
 export const ActiveSortClass = 'places__option--active';
+export const FavoriteStatusButton = 'place-card__bookmark-button--active';
 
 export enum NameSpace {
   data = 'DATA',
   surf = 'SURF',
   user = 'USER',
 }
-

@@ -69,4 +69,7 @@ export type AppScreenProps = {
 
 export type ErrorType = unknown;
 
-
+export type ChangeStatus = {
+  id:number,
+  status: number
+}

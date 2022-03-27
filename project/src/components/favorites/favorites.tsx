@@ -1,11 +1,15 @@
 import {Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../layout';
-import {AppScreenProps} from '../../types/types';
-import Cards from '../cards/cards';
-import {CardMods} from '../../utils/const';
+import {CitiesList} from '../../utils/const';
+import FavoritesItem from './favorites-item/favorites-item';
+import {store} from '../../store';
+import {completeFavoriteOffers} from '../../services/api-actions';
+import {useAppSelector} from '../../hooks';
 
-function Favorites({offers}: AppScreenProps) {
+function Favorites() {
+  store.dispatch(completeFavoriteOffers());
+  const {favoriteOffers} = useAppSelector(({DATA})=>DATA);
   return (
     <Fragment>
       <Layout>
@@ -14,31 +18,7 @@ function Favorites({offers}: AppScreenProps) {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <Link className="locations__item-link" to="#">
-                        <span>Amsterdam</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    <Cards offers={offers} mode={CardMods.Main}/>
-                  </div>
-                </li>
-
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <Link className="locations__item-link" to="#">
-                        <span>Cologne</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    <Cards offers={offers} mode={CardMods.Main}/>
-                  </div>
-                </li>
+                {CitiesList.map((city)=><FavoritesItem offers={favoriteOffers} city={city}/>)}
               </ul>
             </section>
           </div>
