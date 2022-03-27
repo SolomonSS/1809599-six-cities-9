@@ -22,4 +22,5 @@ export type DataProcess = {
   currentOffer: Offer | null
   nearbyOffers: Offer[]
   isDataLoaded: boolean
+  favoriteOffers: Offer[]
 }

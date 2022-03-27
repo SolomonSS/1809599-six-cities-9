@@ -17,4 +17,4 @@ function Cards({offers, handleOnMouseOver, mode}: CardsProps) {
     </Fragment>);
 }
 
-export default React.memo(Cards, (prevProps, nextProps)=>prevProps.offers === nextProps.offers);
+export default React.memo(Cards);
