@@ -8,7 +8,7 @@ const initialState: DataProcess = {
   reviews: [],
   nearbyOffers: [],
   isDataLoaded: false,
-  favoriteOffers: []
+  favoriteOffers: [],
 };
 
 export const dataProcess = createSlice({

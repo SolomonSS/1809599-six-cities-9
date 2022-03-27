@@ -7,6 +7,7 @@ import Cities from '../cities/cities';
 import Sort from '../sort/sort';
 import sortOffers from '../../utils/utils';
 import {useAppSelector} from '../../hooks';
+import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
 
 function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<number|null>(null);
@@ -17,6 +18,9 @@ function MainScreen(): JSX.Element {
   const [sortType, setSortType] = useState<string>(SortTypes.POPULAR);
   const setNewSortType = (newSort:string) => setSortType(newSort);
   const sortedOffers = sortOffers(filteredOffers, sortType);
+  if(offers.length === 0){
+    return <MainScreenEmpty/>;
+  }
   return (
     <Layout>
       <div className="page page--gray page--main">

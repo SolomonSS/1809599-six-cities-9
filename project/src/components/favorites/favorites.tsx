@@ -18,7 +18,7 @@ function Favorites() {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                {CitiesList.map((city)=><FavoritesItem offers={favoriteOffers} city={city}/>)}
+                {CitiesList.map((city)=><FavoritesItem key={city} offers={favoriteOffers} city={city}/>)}
               </ul>
             </section>
           </div>
