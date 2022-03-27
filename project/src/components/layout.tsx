@@ -1,4 +1,4 @@
-import {Fragment} from 'react';
+import React, {Fragment} from 'react';
 import Header from './header/header';
 
 type PropsType = {
@@ -13,4 +13,5 @@ function Layout({children}: PropsType): JSX.Element {
     </Fragment>);
 }
 
-export default Layout;
+export default React.memo(Layout, (prevProp, nextProp)=>
+  prevProp.children===nextProp.children);

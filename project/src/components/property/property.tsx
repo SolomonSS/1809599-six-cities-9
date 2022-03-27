@@ -1,6 +1,6 @@
 import Reviews from '../reviews/reviews';
 import {useParams} from 'react-router-dom';
-import {Fragment, useEffect, useState} from 'react';
+import {Fragment, useCallback, useEffect, useState} from 'react';
 import Header from '../header/header';
 import Map from '../map/map';
 import {CardMods, MapMods} from '../../utils/const';
@@ -16,7 +16,7 @@ function Property() {
 
   const {id: propertyId} = useParams();
   const [activeCard, setActiveCard] = useState<number | null>(Number(propertyId));
-  const handleOnMouseOver = (cardId: number | null) => setActiveCard(cardId);
+  const handleOnMouseOver = useCallback((cardId: number | null) => setActiveCard(cardId),[]);
 
   useEffect(() => {
     store.dispatch(completeOffer(Number(propertyId)));
@@ -28,7 +28,7 @@ function Property() {
     return <NotFound/>;
   }
 
-  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = currentOffer;
+  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description,city} = currentOffer;
 
   return (
     <Fragment>
@@ -109,7 +109,7 @@ function Property() {
               <Reviews reviews={reviews}/>
             </div>
           </div>
-          <Map city={nearbyOffers[0].city} offers={nearbyOffers.concat(currentOffer)} selectedOffer={activeCard} mode={MapMods.Property}/>
+          <Map city={city} offers={nearbyOffers.concat(currentOffer)} selectedOffer={activeCard} mode={MapMods.Property}/>
         </section>
         <OtherPlaces offers={nearbyOffers} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
       </main>

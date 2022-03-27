@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import SignInOut from '../sign-in-out/sign-in-out';
+import React from 'react';
 
 function Header(): JSX.Element {
   return (
@@ -21,4 +22,4 @@ function Header(): JSX.Element {
     </header>);
 }
 
-export default Header;
+export default React.memo(Header);

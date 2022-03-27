@@ -1,7 +1,7 @@
 import Layout from '../layout';
 import Cards from '../cards/cards';
 import Map from '../map/map';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {CardMods, MapMods, SortTypes} from '../../utils/const';
 import Cities from '../cities/cities';
 import Sort from '../sort/sort';
@@ -10,7 +10,7 @@ import {useAppSelector} from '../../hooks';
 
 function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<number|null>(null);
-  const handleOnMouseOver = (id:number|null)=>setActiveCard(id);
+  const handleOnMouseOver = useCallback((id:number|null)=>setActiveCard(id),[]);
   const {activeCity} = useAppSelector((({SURF}) => SURF));
   const {offers} = useAppSelector((({DATA}) => DATA));
   const filteredOffers = offers.filter((offer)=>offer.city.name === activeCity);

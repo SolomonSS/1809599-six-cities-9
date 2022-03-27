@@ -1,4 +1,5 @@
 import {ActiveSortClass} from '../../../utils/const';
+import React from 'react';
 
 type SortItemProps = {
   activeSort: string,
@@ -14,4 +15,4 @@ function SortItem({activeSort, currentSort, handleClick, handleSortMenuClick}:So
   );
 }
 
-export default SortItem;
+export default React.memo(SortItem);
