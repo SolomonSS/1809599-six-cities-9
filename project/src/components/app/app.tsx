@@ -4,7 +4,7 @@ import {AppRoute} from '../../utils/const';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import Property from '../property/property';
-import PrivateRoute from '../private-route';
+import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import HistoryRouter from '../../history/history-route';
 import browserHistory from '../../history';
