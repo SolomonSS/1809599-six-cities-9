@@ -1,4 +1,4 @@
-import {dataProcess, loadComments, loadFavorites, loadNearby, loadOffers} from './data-process';
+import {dataProcess, loadComments, loadFavorites, loadNearby, loadOffer, loadOffers} from './data-process';
 import {makeFakeOffers, makeFakeReviews} from '../../../utils/mocks';
 
 const fakeOffers = makeFakeOffers();
@@ -6,7 +6,7 @@ const fakeReviews = makeFakeReviews();
 
 
 describe('Testing of data-process reducer:', ()=>{
-  let state = {offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: true, favoriteOffers:[]};
+  let state = {offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: false, favoriteOffers:[]};
   it('without additional parameters',()=>{
     expect(dataProcess.reducer(void 0, {type: 'UNKNOWN_ACTION'})).toEqual(state);
   });
@@ -18,21 +18,21 @@ describe('Testing of data-process reducer:', ()=>{
 
   it('Load reviews:', ()=>{
     expect(dataProcess.reducer(state, loadComments(fakeReviews)))
-      .toEqual({offers: [], currentOffer: null, nearbyOffers: [], reviews: fakeReviews, isDataLoaded: true, favoriteOffers:[]});
+      .toEqual({offers: [], currentOffer: null, nearbyOffers: [], reviews: fakeReviews, isDataLoaded: false, favoriteOffers:[]});
   });
 
   it('Load offer:', ()=>{
-    expect(dataProcess.reducer(state, loadComments(fakeOffers[0])))
-      .toEqual({offers: [], currentOffer: fakeOffers[0], nearbyOffers: [], reviews: [], isDataLoaded: true, favoriteOffers:[]});
+    expect(dataProcess.reducer(state, loadOffer(fakeOffers[0])))
+      .toEqual({offers: [], currentOffer: fakeOffers[0], nearbyOffers: [], reviews: [], isDataLoaded: false, favoriteOffers:[]});
   });
 
   it('Load nearby:', ()=>{
     expect(dataProcess.reducer(state, loadNearby(fakeOffers)))
-      .toEqual({offers: [], currentOffer: null, nearbyOffers: fakeOffers, reviews: [], isDataLoaded: true, favoriteOffers:[]});
+      .toEqual({offers: [], currentOffer: null, nearbyOffers: fakeOffers, reviews: [], isDataLoaded: false, favoriteOffers:[]});
   });
 
   it('Load favorites:', ()=>{
     expect(dataProcess.reducer(state, loadFavorites(fakeOffers)))
-      .toEqual({offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: true, favoriteOffers:fakeOffers});
+      .toEqual({offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: false, favoriteOffers:fakeOffers});
   });
 })

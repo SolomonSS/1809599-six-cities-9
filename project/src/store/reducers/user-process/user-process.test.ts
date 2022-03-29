@@ -12,7 +12,7 @@ describe('Test user process reducer:',()=>{
   const state = {authorizationStatus: AuthorizationStatus.Unknown};
   it('Testing set authorization status:', ()=>{
     expect(userProcess.reducer(state, requireAuthorization({authorizationStatus: AuthorizationStatus.Auth})))
-      .toEqual({authorizationStatus: AuthorizationStatus.Auth});
+      .toEqual({authorizationStatus:{authorizationStatus: AuthorizationStatus.Auth}});
   });
 });
 
@@ -40,6 +40,6 @@ describe('Async actions', () => {
 
     const actions = store.getActions().map(({type}) => type);
 
-    expect(actions).toContain(requireAuthorization.toString());
+    expect(actions).toContain("user/checkAuth/pending");
   });
 });

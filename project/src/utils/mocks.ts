@@ -1,5 +1,7 @@
 import {datatype, internet, lorem} from 'faker';
 import {Offer, ReviewItem} from '../types/types';
+import {configureMockStore} from "@jedmao/redux-mock-store";
+import {AuthorizationStatus, DEFAULT_CITY} from "./const";
 
 const AMOUNT = 3;
 
@@ -56,4 +58,11 @@ export const makeFakeReviews = (amount = AMOUNT): ReviewItem[] => Array.from(
     }
   }));
 
-export default {makeFakeOffers, makeFakeReviews};
+const mockStore = configureMockStore();
+
+export const fakeStore = mockStore({
+  USER: {authorizationStatus: AuthorizationStatus.Auth},
+  DATA: {offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: true, favoriteOffers:[]},
+  SURF: {activeCity: DEFAULT_CITY, email:null, isSubmiting: false},
+});
+

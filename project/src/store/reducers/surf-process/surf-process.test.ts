@@ -7,9 +7,8 @@ const review = makeFakeReviews(1);
 describe('Surf process tests:',()=>{
   const state = {activeCity: DEFAULT_CITY, email:null, isSubmiting: false};
   it('Should change city:',  ()=> {
-    const city = CitiesList[Math.random()*CitiesList.length];
-    expect(surfProcess.reducer(state, changeCity(city)))
-      .toEqual({activeCity: city, email:null, isSubmiting: false});
+    expect(surfProcess.reducer(state, changeCity({city:CitiesList[1]})))
+      .toEqual({activeCity: CitiesList[1], email:null, isSubmiting: false});
   });
 
   it('Should set email:', ()=>{

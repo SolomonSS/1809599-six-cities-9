@@ -12,7 +12,7 @@ function Sort({activeSortType, setSortType}: SortProps): JSX.Element {
   const handleSortMenuShow = () => setIsShowMenu(!isShowMenu);
   const sortMenuShowClass = isShowMenu ? 'places__options--opened' : '';
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid={'Sort-component-hear'}>
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0} onClick={handleSortMenuShow}>{activeSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
