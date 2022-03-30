@@ -1,22 +1,22 @@
 import Reviews from '../reviews/reviews';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {Fragment, useCallback, useEffect, useState} from 'react';
 import Header from '../header/header';
 import Map from '../map/map';
-import {CardMods, MapMods} from '../../utils/const';
+import {AppRoute, AuthorizationStatus, CardMods, FavoriteStatusButton, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
-import {completeComments, completeNearbyOffers, completeOffer} from '../../services/api-actions';
+import {changeStatus, completeComments, completeNearbyOffers, completeOffer} from '../../services/api-actions';
 import {store} from '../../store';
 import NotFound from '../not-found/not-found';
-import {useAppSelector} from '../../hooks';
-
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {ChangeStatus} from '../../types/types';
 
 function Property() {
   const {currentOffer, reviews, nearbyOffers} = useAppSelector((({DATA}) => DATA));
-
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {id: propertyId} = useParams();
-  const [activeCard, setActiveCard] = useState<number | null>(Number(propertyId));
-  const handleOnMouseOver = useCallback((cardId: number | null) => setActiveCard(cardId),[]);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     store.dispatch(completeOffer(Number(propertyId)));
@@ -28,12 +28,24 @@ function Property() {
     return <NotFound/>;
   }
 
-  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description,city} = currentOffer;
+  const {id, images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods, host, description,city, isFavorite} = currentOffer;
+  const isFavoriteStatus = isFavorite ? FavoriteStatusButton : '';
+  const handleChangeStatus = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      const statusData: ChangeStatus = {
+        id: id,
+        status: Number(!isFavorite),
+      };
+      dispatch(changeStatus(statusData));
+    } else {
+      navigate(AppRoute.Login);
+    }
+  };
 
   return (
     <Fragment>
       <Header/>
-      <main className="page__main page__main--property">
+      <main className="page__main page__main--property" data-testid={'Hi from Property component'}>
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
@@ -49,7 +61,7 @@ function Property() {
               {isPremium ? <div className="property__mark"><span>Premium</span></div> : null}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{title}</h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className={`property__bookmark-button button ${isFavoriteStatus}`} type="button" onClick={handleChangeStatus}>
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -109,9 +121,9 @@ function Property() {
               <Reviews reviews={reviews}/>
             </div>
           </div>
-          <Map city={city} offers={nearbyOffers.concat(currentOffer)} selectedOffer={activeCard} mode={MapMods.Property}/>
+          <Map city={city} offers={nearbyOffers.concat(currentOffer)} selectedOffer={id} mode={MapMods.Property}/>
         </section>
-        <OtherPlaces offers={nearbyOffers} handleOnMouseOver={handleOnMouseOver} mode={CardMods.Property}/>
+        <OtherPlaces offers={nearbyOffers} mode={CardMods.Property}/>
       </main>
     </Fragment>
   );

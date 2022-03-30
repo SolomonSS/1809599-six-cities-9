@@ -1,12 +1,19 @@
 import {FormEvent, useRef} from 'react';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {AuthData} from '../../types/types';
-import {loginAction} from '../../services/api-actions';
+import {checkAuth, loginAction} from '../../services/api-actions';
+import {useNavigate} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus} from '../../utils/const';
 
 function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const navigate = useNavigate();
+  if(authorizationStatus===AuthorizationStatus.Auth){
+    navigate(AppRoute.Main);
+  }
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -40,7 +47,7 @@ function Login() {
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
-            <h1 className="login__title">Sign in</h1>
+            <h1 className="login__title" data-testid={'Hi from login component'}>Sign in</h1>
             <form className="login__form form" action="" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
