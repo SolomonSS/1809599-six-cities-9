@@ -1,16 +1,18 @@
-import {AppRoute, DEFAULT_CITY} from '../../utils/const';
+import {AppRoute} from '../../utils/const';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import App from './app';
 import {render, screen} from '@testing-library/react';
 import {fakeStore} from '../../utils/mocks';
+import HistoryRouter from '../../history/history-route';
 
 const history = createMemoryHistory();
 
-
 const fakeApp = (
   <Provider store={fakeStore}>
-      <App />
+    <HistoryRouter history={history}>
+      <App/>
+    </HistoryRouter>
   </Provider>
 );
 
@@ -23,17 +25,17 @@ describe('Application Routing', () => {
   it('should render "Login" when user navigate to "AppRoute.Login"', () => {
     history.push(AppRoute.Login);
     render(fakeApp);
-    expect(screen.getByText('Amsterdam')).toBeInTheDocument();
-    //expect(screen.getByText('Password')).toBeInTheDocument();
+    expect(screen.getByTestId('Hi from login component')).toBeInTheDocument();
   });
   it('should render "Favorites" when user navigate to "AppRoute.Favorites"', () => {
     history.push(AppRoute.Favorites);
     render(fakeApp);
-    expect(screen.getByText('Cities')).toBeInTheDocument();
+    expect(screen.getByTestId('Hey from Favorites component')).toBeInTheDocument();
   });
   it('should render "Offer" when user navigate to "AppRoute.Room"', () => {
-    history.push(`${AppRoute.Room}21`);
+    const randomId = Math.random()*90;
+    history.push(`${AppRoute.Room}${randomId}`);
     render(fakeApp);
-    expect(screen.getByText('Cities')).toBeInTheDocument();
+    expect(screen.getByText('404. Page not found')).toBeInTheDocument();
   });
 });
