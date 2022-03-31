@@ -1,5 +1,5 @@
-import {renderHook} from "@testing-library/react-hooks";
-import useMap from "./use-map";
+import {renderHook} from '@testing-library/react-hooks';
+import useMap from './use-map';
 
 const rootElement = document.createElement('div');
 
@@ -17,12 +17,19 @@ const fakeCity = {
   name: 'Name',
 };
 
-describe('Hook: useMap ',()=>{
-  it('should return map:',()=>{
-    const {result} = renderHook(()=>
-      useMap(fakeRef, fakeCity));
+const expectedResultCity = {
+  center: {
+    lat: 10,
+    lng: 20,
+  },
+  zoom: 10,
+}
 
-    expect(result.current).toBeInstanceOf(Map);
-    expect(result.current?.options).toEqual(fakeCity);
+describe('Hook: useMap ', () => {
+  it('should return map:', () => {
+    const {result} = renderHook(() =>
+      useMap(fakeRef, fakeCity));
+    expect(result.current).toBeInstanceOf(Object);
+    expect(result.current?.options).toEqual(expectedResultCity);
   });
 });
