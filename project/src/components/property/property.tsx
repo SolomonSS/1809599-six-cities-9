@@ -1,30 +1,33 @@
 import Reviews from '../reviews/reviews';
 import {useNavigate, useParams} from 'react-router-dom';
-import {Fragment, useCallback, useEffect, useState} from 'react';
+import {Fragment, useEffect} from 'react';
 import Header from '../header/header';
 import Map from '../map/map';
 import {AppRoute, AuthorizationStatus, CardMods, FavoriteStatusButton, MapMods} from '../../utils/const';
 import OtherPlaces from '../other-places/other-places';
 import {changeStatus, completeComments, completeNearbyOffers, completeOffer} from '../../services/api-actions';
-import {store} from '../../store';
-import NotFound from '../not-found/not-found';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {ChangeStatus} from '../../types/types';
+import LoadingScreen from '../loading-screen/loading-screen';
+import NotFound from '../not-found/not-found';
 
 function Property() {
-  const {currentOffer, reviews, nearbyOffers} = useAppSelector((({DATA}) => DATA));
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {id: propertyId} = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {currentOffer, reviews, nearbyOffers, isOfferLoaded} = useAppSelector((({DATA}) => DATA));
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
   useEffect(() => {
-    store.dispatch(completeOffer(Number(propertyId)));
-    store.dispatch(completeNearbyOffers(Number(propertyId)));
-    store.dispatch(completeComments(Number(propertyId)));
+    dispatch(completeOffer(Number(propertyId)));
+    dispatch(completeNearbyOffers(Number(propertyId)));
+    dispatch(completeComments(Number(propertyId)));
   }, [propertyId, reviews]);
 
-  if (!currentOffer) {
+  if (!isOfferLoaded) {
+    return <LoadingScreen/>;
+  }
+  if(currentOffer === null){
     return <NotFound/>;
   }
 
