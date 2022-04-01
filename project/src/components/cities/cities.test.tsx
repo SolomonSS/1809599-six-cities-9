@@ -1,6 +1,6 @@
 import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
-import HistoryRouter from '../../history/history-route';
+import HistoryRouter from '../history/history-route';
 import {CitiesList} from '../../utils/const';
 import Cities from './cities';
 import {Provider} from 'react-redux';

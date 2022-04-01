@@ -2,7 +2,7 @@ import {fakeStore, makeFakeOffers} from '../../utils/mocks';
 import {getByText, render, screen} from '@testing-library/react';
 import Card from './card';
 import {CardMods} from '../../utils/const';
-import HistoryRouter from "../../history/history-route";
+import HistoryRouter from "../history/history-route";
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import userEvent from "@testing-library/user-event";

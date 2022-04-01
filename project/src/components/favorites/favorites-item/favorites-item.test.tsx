@@ -3,7 +3,7 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import FavoritesItem from './favorites-item';
 import {fakeStore, makeFakeOffers} from '../../../utils/mocks';
-import HistoryRouter from '../../../history/history-route';
+import HistoryRouter from '../../history/history-route';
 import {CitiesList} from "../../../utils/const";
 
 const offer = makeFakeOffers(3);

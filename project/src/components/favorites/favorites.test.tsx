@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {fakeStore} from '../../utils/mocks';
-import HistoryRouter from '../../history/history-route';
+import HistoryRouter from '../history/history-route';
 import Favorites from './favorites';
 
 describe('Testing Favorites item component', () => {
@@ -15,6 +15,6 @@ describe('Testing Favorites item component', () => {
         </HistoryRouter>
       </Provider>
     );
-    expect(screen.getByTestId('Hey from Favorites component')).toBeInTheDocument();
+    expect(screen.getByText('Nothing yet saved.')).toBeInTheDocument();
   });
 });

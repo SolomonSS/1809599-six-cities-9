@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import App from './app';
 import {render, screen} from '@testing-library/react';
 import {fakeStore} from '../../utils/mocks';
-import HistoryRouter from '../../history/history-route';
+import HistoryRouter from '../history/history-route';
 
 const history = createMemoryHistory();
 
@@ -30,11 +30,10 @@ describe('Application Routing', () => {
   it('should render "Favorites" when user navigate to "AppRoute.Favorites"', () => {
     history.push(AppRoute.Favorites);
     render(fakeApp);
-    expect(screen.getByTestId('Hey from Favorites component')).toBeInTheDocument();
+    expect(screen.getByText('Nothing yet saved.')).toBeInTheDocument();
   });
   it('should render "Offer" when user navigate to "AppRoute.Room"', () => {
-    const randomId = Math.random()*90;
-    history.push(`${AppRoute.Room}${randomId}`);
+    history.push(AppRoute.Room);
     render(fakeApp);
     expect(screen.getByText('404. Page not found')).toBeInTheDocument();
   });

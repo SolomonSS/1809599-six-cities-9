@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import HistoryRouter from '../../history/history-route';
+import HistoryRouter from '../history/history-route';
 import {createMemoryHistory} from 'history';
 import {fakeStore, makeFakeOffers} from '../../utils/mocks';
 import {Provider} from 'react-redux';

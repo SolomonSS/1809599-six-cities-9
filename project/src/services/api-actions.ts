@@ -15,7 +15,7 @@ import {
   updateOffer
 } from '../store/reducers/data/data-process';
 import {requireAuthorization} from '../store/reducers/user-process/user-process';
-import {setEmail, submitingComment} from '../store/reducers/surf-process/surf-process';
+import {setEmail, submitingChangeStatus, submitingComment} from '../store/reducers/surf-process/surf-process';
 
 export const completeOffers = createAsyncThunk('data/fetchOffers', async () => {
   try {
@@ -121,6 +121,7 @@ export const changeStatus = createAsyncThunk(
   async ({id,status}:ChangeStatus)=>{
     try {
       const {data} = await api.post(`${APIRoute.FAVORITES}/${id}/${status}`);
+      store.dispatch(submitingChangeStatus(false));
       store.dispatch(updateOffer(data));
     }
     catch(err){

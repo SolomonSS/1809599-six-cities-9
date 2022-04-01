@@ -2,7 +2,7 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import {fakeStore} from '../../../utils/mocks';
-import HistoryRouter from '../../../history/history-route';
+import HistoryRouter from '../../history/history-route';
 import SortItem from './sort-item';
 import {SortTypes} from '../../../utils/const';
 

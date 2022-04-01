@@ -2,9 +2,9 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import {fakeStore} from '../../utils/mocks';
-import HistoryRouter from '../../history/history-route';
+import HistoryRouter from '../history/history-route';
 import Login from './login';
-import userEvent from "@testing-library/user-event";
+import userEvent from '@testing-library/user-event';
 
 describe('Testing Login item component', () => {
   it('Should return Login item component:', () => {

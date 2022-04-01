@@ -1,21 +1,22 @@
 import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
-import {fakeStore} from '../../../utils/mocks';
+import {fakeStore, makeFakeReviews} from '../../../utils/mocks';
 import HistoryRouter from '../../history/history-route';
-import SignOut from './sign-out';
+import Review from './review';
 
-describe('Testin SignOut component:', ()=>{
-  it('Should return Sign Out component:',()=>{
+const fakeReview = makeFakeReviews(1);
+
+describe('Testing Review item component', () => {
+  it('Should return Review item component:', () => {
     const history = createMemoryHistory();
     render(
       <Provider store={fakeStore}>
         <HistoryRouter history={history}>
-          <SignOut/>
+          <Review review={fakeReview[0]}/>
         </HistoryRouter>
       </Provider>
     );
-    expect(screen.getByText('Sign out')).toBeInTheDocument();
-    expect(screen.getByTestId('Sign-out-here')).toBeInTheDocument();
+    expect(screen.getByText(fakeReview[0].comment)).toBeInTheDocument();
   });
 });
