@@ -1,4 +1,4 @@
-import {ReviewItem} from '../../types/types';
+import {ReviewItem} from '../../../types/types';
 import React from 'react';
 
 type PropsType ={

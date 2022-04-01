@@ -1,5 +1,5 @@
 import {CitiesList} from '../../utils/const';
-import CityItem from './city/city-item';
+import CityItem from './city-item/city-item';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeCity} from '../../store/reducers/surf-process/surf-process';
 import {useCallback} from 'react';

@@ -10,9 +10,9 @@ function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   dispatch(resetOfferLoaded());
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const navigate = useNavigate();
   if(authorizationStatus===AuthorizationStatus.Auth){
     navigate(AppRoute.Main);
   }
