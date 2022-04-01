@@ -34,7 +34,7 @@ export enum APIRoute {
   LOGOUT = '/logout',
 }
 
-export enum HTTP_CODE {
+export enum HTTP_CODES {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,

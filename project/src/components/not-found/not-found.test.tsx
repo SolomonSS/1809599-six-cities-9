@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
-import HistoryRouter from '../../history/history-route';
+import HistoryRouter from '../history/history-route';
 import NotFound from './not-found';
 import {Provider} from "react-redux";
 import {fakeStore} from "../../utils/mocks";

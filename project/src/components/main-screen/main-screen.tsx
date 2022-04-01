@@ -8,9 +8,12 @@ import Sort from '../sort/sort';
 import sortOffers from '../../utils/utils';
 import {useAppSelector} from '../../hooks';
 import MainScreenEmpty from '../main-screen-empty/main-screen-empty';
+import {store} from '../../store';
+import {resetOfferLoaded} from '../../store/reducers/data/data-process';
 
 function MainScreen(): JSX.Element {
   const [activeCard, setActiveCard] = useState<number|null>(null);
+  store.dispatch(resetOfferLoaded());
   const handleOnMouseOver = useCallback((id:number|null)=>setActiveCard(id),[]);
   const {activeCity} = useAppSelector((({SURF}) => SURF));
   const {offers} = useAppSelector((({DATA}) => DATA));

@@ -4,6 +4,7 @@ import {AppRoute, AuthorizationStatus, FavoriteStatusButton} from '../../utils/c
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeStatus} from '../../services/api-actions';
+import {submitingChangeStatus} from '../../store/reducers/surf-process/surf-process';
 
 type CardProps = {
   offer: Offer,
@@ -15,10 +16,12 @@ function Card({offer, handleOnMouseOver = () => void 0, mode}: CardProps): JSX.E
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {isSubmiting} = useAppSelector(({SURF})=>SURF);
 
   const {type, previewImage, price, rating, title, id, isFavorite} = offer;
   const isFavoriteStatus = isFavorite ? FavoriteStatusButton : '';
   const handleChangeStatus = () => {
+    dispatch(submitingChangeStatus(true));
     if (authorizationStatus === AuthorizationStatus.Auth) {
       const statusData: ChangeStatus = {
         id: id,
@@ -42,7 +45,7 @@ function Card({offer, handleOnMouseOver = () => void 0, mode}: CardProps): JSX.E
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavoriteStatus}`} type="button" onClick={handleChangeStatus}>
+          <button className={`place-card__bookmark-button button ${isFavoriteStatus}`} disabled={isSubmiting} type="button" onClick={handleChangeStatus}>
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

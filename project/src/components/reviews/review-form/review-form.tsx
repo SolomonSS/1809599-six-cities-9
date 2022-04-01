@@ -1,9 +1,9 @@
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
-import {NewComment} from '../../types/types';
+import {NewComment} from '../../../types/types';
 import {useParams} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {completeComments, postReview} from '../../services/api-actions';
-import {submitingComment} from '../../store/reducers/surf-process/surf-process';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {completeComments, postReview} from '../../../services/api-actions';
+import {submitingComment} from '../../../store/reducers/surf-process/surf-process';
 
 const Stars = [
   {

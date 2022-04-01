@@ -6,10 +6,16 @@ import FavoritesItem from './favorites-item/favorites-item';
 import {store} from '../../store';
 import {completeFavoriteOffers} from '../../services/api-actions';
 import {useAppSelector} from '../../hooks';
+import {resetOfferLoaded} from '../../store/reducers/data/data-process';
+import FavoritesEmpty from './favorites-empty';
 
 function Favorites() {
   store.dispatch(completeFavoriteOffers());
+  store.dispatch(resetOfferLoaded());
   const {favoriteOffers} = useAppSelector(({DATA})=>DATA);
+  if(favoriteOffers.length === 0){
+    return <FavoritesEmpty/>;
+  }
   return (
     <Fragment>
       <Layout>

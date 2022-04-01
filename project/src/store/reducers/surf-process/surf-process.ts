@@ -22,7 +22,10 @@ export const surfProcess = createSlice({
     submitingComment:(state, action)=>{
       state.isSubmiting = action.payload;
     },
+    submitingChangeStatus:(state, action)=>{
+      state.isSubmiting = action.payload;
+    },
   },
 });
 
-export const {changeCity, setEmail, submitingComment} = surfProcess.actions;
+export const {changeCity, setEmail, submitingComment, submitingChangeStatus} = surfProcess.actions;

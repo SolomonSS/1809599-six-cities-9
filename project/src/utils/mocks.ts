@@ -58,7 +58,7 @@ export const makeFakeReviews = (amount = AMOUNT): ReviewItem[] => Array.from(
     }
   }));
 
-const mockStore = configureMockStore();
+export const mockStore = configureMockStore();
 
 export const fakeStore = mockStore({
   USER: {authorizationStatus: AuthorizationStatus.Auth},

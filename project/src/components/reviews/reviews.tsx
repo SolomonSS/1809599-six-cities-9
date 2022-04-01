@@ -1,6 +1,6 @@
 import {ReviewItem} from '../../types/types';
-import Review from './review';
-import ReviewForm from './review-form';
+import Review from './review/review';
+import ReviewForm from './review-form/review-form';
 import {AuthorizationStatus} from '../../utils/const';
 import {useAppSelector} from '../../hooks';
 

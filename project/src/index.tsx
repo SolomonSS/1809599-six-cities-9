@@ -7,7 +7,7 @@ import {completeOffers} from './services/api-actions';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import browserHistory from './history';
-import HistoryRouter from './history/history-route';
+import HistoryRouter from './components/history/history-route';
 
 store.dispatch(completeOffers());
 
