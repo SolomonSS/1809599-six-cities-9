@@ -25,7 +25,7 @@ describe('Application Routing', () => {
   it('should render "Login" when user navigate to "AppRoute.Login"', () => {
     history.push(AppRoute.Login);
     render(fakeApp);
-    expect(screen.getByTestId('Hi from login component')).toBeInTheDocument();
+    expect(screen.getByText('No places to stay available')).toBeInTheDocument();
   });
   it('should render "Favorites" when user navigate to "AppRoute.Favorites"', () => {
     history.push(AppRoute.Favorites);

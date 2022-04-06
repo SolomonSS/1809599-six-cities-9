@@ -1,12 +1,13 @@
-import {FormEvent, useRef} from 'react';
+import {FormEvent, useEffect, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {AuthData} from '../../types/types';
 import {loginAction} from '../../services/api-actions';
-import {Link, Navigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../utils/const';
 import {resetOfferLoaded} from '../../store/reducers/data/data-process';
 import {getRandomCity, isValidPass} from '../../utils/utils';
 import {changeCity} from '../../store/reducers/surf-process/surf-process';
+import browserHistory from '../../history';
 
 function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -14,6 +15,11 @@ function Login() {
   const dispatch = useAppDispatch();
   dispatch(resetOfferLoaded());
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  useEffect(()=>{
+    if(authorizationStatus===AuthorizationStatus.Auth){
+      browserHistory.push(AppRoute.Main);
+    }
+  },[]);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -35,10 +41,6 @@ function Login() {
       });
     }
   };
-
-  if(authorizationStatus===AuthorizationStatus.Auth){
-    return <Navigate to={AppRoute.Main} />;
-  }
 
   return (
     <div className="page page--gray page--login">
