@@ -19,6 +19,7 @@ function Login() {
     if(authorizationStatus===AuthorizationStatus.Auth){
       browserHistory.push(AppRoute.Main);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   const onSubmit = (authData: AuthData) => {

@@ -16,7 +16,7 @@ describe('Testing Login item component', () => {
         </HistoryRoute>
       </Provider>,
     );
-    expect(screen.getByText('Password')).toBeInTheDocument();
+    expect(screen.getByTestId('Hi from login component')).toBeInTheDocument();
   });
 
   it('When typing e-mail and password:', () => {
