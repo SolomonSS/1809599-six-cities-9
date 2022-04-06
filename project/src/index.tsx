@@ -7,17 +7,17 @@ import {completeOffers} from './services/api-actions';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import browserHistory from './history';
-import HistoryRouter from './components/history/history-route';
+import HistoryRoute from './components/history/history-route';
 
 store.dispatch(completeOffers());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HistoryRouter history={browserHistory}>
+      <HistoryRoute history={browserHistory}>
         <ToastContainer/>
         <App/>
-      </HistoryRouter>
+      </HistoryRoute>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

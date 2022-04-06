@@ -6,7 +6,7 @@ const fakeReviews = makeFakeReviews();
 
 
 describe('Testing of data-process reducer:', ()=>{
-  let state = {offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: false, favoriteOffers:[], isOfferLoaded: false};
+  const state = {offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: false, favoriteOffers:[], isOfferLoaded: false};
   it('without additional parameters',()=>{
     expect(dataProcess.reducer(void 0, {type: 'UNKNOWN_ACTION'})).toEqual(state);
   });
@@ -35,4 +35,4 @@ describe('Testing of data-process reducer:', ()=>{
     expect(dataProcess.reducer(state, loadFavorites(fakeOffers)))
       .toEqual({offers: [], currentOffer: null, nearbyOffers: [], reviews: [], isDataLoaded: false, favoriteOffers:fakeOffers, isOfferLoaded: false});
   });
-})
+});

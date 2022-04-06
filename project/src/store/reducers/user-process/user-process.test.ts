@@ -40,6 +40,6 @@ describe('Async actions', () => {
 
     const actions = store.getActions().map(({type}) => type);
 
-    expect(actions).toContain("user/checkAuth/pending");
+    expect(actions).toContain('user/checkAuth/pending');
   });
 });

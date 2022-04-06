@@ -2,7 +2,7 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import {fakeStore} from '../../utils/mocks';
-import HistoryRouter from '../history/history-route';
+import HistoryRoute from '../history/history-route';
 import Login from './login';
 import userEvent from '@testing-library/user-event';
 
@@ -11,10 +11,10 @@ describe('Testing Login item component', () => {
     const history = createMemoryHistory();
     render(
       <Provider store={fakeStore}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <Login />
-        </HistoryRouter>
-      </Provider>
+        </HistoryRoute>
+      </Provider>,
     );
     expect(screen.getByText('Password')).toBeInTheDocument();
   });
@@ -23,10 +23,10 @@ describe('Testing Login item component', () => {
     const history = createMemoryHistory();
     render(
       <Provider store={fakeStore}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <Login />
-        </HistoryRouter>
-      </Provider>
+        </HistoryRoute>
+      </Provider>,
     );
     userEvent.type(screen.getByTestId('email-test'), 'testtest');
     expect(screen.getByTestId('email-test')).toHaveValue('testtest');

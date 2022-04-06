@@ -1,11 +1,11 @@
 import {datatype, internet, lorem} from 'faker';
 import {Offer, ReviewItem} from '../types/types';
-import {configureMockStore} from "@jedmao/redux-mock-store";
-import {AuthorizationStatus, DEFAULT_CITY} from "./const";
+import {configureMockStore} from '@jedmao/redux-mock-store';
+import {AuthorizationStatus, DEFAULT_CITY} from './const';
 
 const AMOUNT = 3;
 
-export const makeFakeOffers = (amount = AMOUNT, cityName?: string): Offer[] => Array.from(
+export const makeFakeOffers = (amount = AMOUNT): Offer[] => Array.from(
   Array(amount),
   () => ({
     bedrooms: datatype.number(),
@@ -55,7 +55,7 @@ export const makeFakeReviews = (amount = AMOUNT): ReviewItem[] => Array.from(
       id: datatype.number(),
       isPro: datatype.boolean(),
       name: datatype.string(),
-    }
+    },
   }));
 
 export const mockStore = configureMockStore();

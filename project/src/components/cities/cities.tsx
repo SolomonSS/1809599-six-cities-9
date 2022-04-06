@@ -9,6 +9,7 @@ function Cities() {
   const dispatch = useAppDispatch();
   const handleChange = useCallback((city: string)=> {
     dispatch(changeCity({city}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
   return (
     <section className="locations container">

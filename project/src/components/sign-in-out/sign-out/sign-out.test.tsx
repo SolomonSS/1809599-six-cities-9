@@ -2,7 +2,7 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import {fakeStore} from '../../../utils/mocks';
-import HistoryRouter from '../../history/history-route';
+import HistoryRoute from '../../history/history-route';
 import SignOut from './sign-out';
 
 describe('Testin SignOut component:', ()=>{
@@ -10,10 +10,10 @@ describe('Testin SignOut component:', ()=>{
     const history = createMemoryHistory();
     render(
       <Provider store={fakeStore}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <SignOut/>
-        </HistoryRouter>
-      </Provider>
+        </HistoryRoute>
+      </Provider>,
     );
     expect(screen.getByText('Sign out')).toBeInTheDocument();
     expect(screen.getByTestId('Sign-out-here')).toBeInTheDocument();

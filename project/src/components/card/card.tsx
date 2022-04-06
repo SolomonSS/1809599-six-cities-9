@@ -21,12 +21,12 @@ function Card({offer, handleOnMouseOver = () => void 0, mode}: CardProps): JSX.E
   const {type, previewImage, price, rating, title, id, isFavorite} = offer;
   const isFavoriteStatus = isFavorite ? FavoriteStatusButton : '';
   const handleChangeStatus = () => {
-    dispatch(submitingChangeStatus(true));
     if (authorizationStatus === AuthorizationStatus.Auth) {
       const statusData: ChangeStatus = {
         id: id,
         status: Number(!isFavorite),
       };
+      dispatch(submitingChangeStatus(true));
       dispatch(changeStatus(statusData));
     } else {
       navigate(AppRoute.Login);
@@ -35,9 +35,9 @@ function Card({offer, handleOnMouseOver = () => void 0, mode}: CardProps): JSX.E
   return (
     <article className={`${mode} place-card`} onMouseOver={() => handleOnMouseOver(id)} onMouseLeave={() => handleOnMouseOver(null)}>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
-        </a>
+        <Link to='/'>
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

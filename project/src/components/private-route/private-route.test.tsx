@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import PrivateRoute from './private-route';
 import {AppRoute, AuthorizationStatus} from '../../utils/const';
-import HistoryRouter from '../history/history-route';
+import HistoryRoute from '../history/history-route';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
@@ -20,7 +20,7 @@ describe('Component: PrivateRouter', () => {
 
     render(
       <Provider store={store}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <Routes>
             <Route
               path={AppRoute.Login}
@@ -30,13 +30,14 @@ describe('Component: PrivateRouter', () => {
               path='/private'
               element={
                 <PrivateRoute
-                  authorization={AuthorizationStatus.NoAuth}>
+                  authorization={AuthorizationStatus.NoAuth}
+                >
                   <h1>Private Route</h1>
                 </PrivateRoute>
               }
             />
           </Routes>
-        </HistoryRouter>
+        </HistoryRoute>
       </Provider>,
     );
 
@@ -51,7 +52,7 @@ describe('Component: PrivateRouter', () => {
 
     render(
       <Provider store={store}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <Routes>
             <Route
               path={AppRoute.Login}
@@ -61,13 +62,14 @@ describe('Component: PrivateRouter', () => {
               path='/private'
               element={
                 <PrivateRoute
-                 authorization={AuthorizationStatus.Auth}>
+                  authorization={AuthorizationStatus.Auth}
+                >
                   <h1>Private Route</h1>
                 </PrivateRoute>
               }
             />
           </Routes>
-        </HistoryRouter>
+        </HistoryRoute>
       </Provider>,
     );
 

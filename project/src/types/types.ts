@@ -63,10 +63,6 @@ export type ReviewItem = {
   }
 };
 
-export type AppScreenProps = {
-  offers: Offer[]
-}
-
 export type ErrorType = unknown;
 
 export type ChangeStatus = {

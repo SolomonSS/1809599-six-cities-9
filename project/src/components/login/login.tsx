@@ -2,29 +2,33 @@ import {FormEvent, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {AuthData} from '../../types/types';
 import {loginAction} from '../../services/api-actions';
-import {useNavigate} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../utils/const';
 import {resetOfferLoaded} from '../../store/reducers/data/data-process';
+import {getRandomCity, isValidPass} from '../../utils/utils';
+import {changeCity} from '../../store/reducers/surf-process/surf-process';
 
 function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   dispatch(resetOfferLoaded());
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  if(authorizationStatus===AuthorizationStatus.Auth){
-    navigate(AppRoute.Main);
-  }
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
   };
 
+  const city = getRandomCity();
+
+  const onRandomCityClick = () =>{
+    dispatch(changeCity({city}));
+  };
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (loginRef.current !== null && passwordRef.current !== null && isValidPass(passwordRef.current?.value)) {
       onSubmit({
         email: loginRef.current.value,
         password: passwordRef.current.value,
@@ -32,15 +36,19 @@ function Login() {
     }
   };
 
+  if(authorizationStatus===AuthorizationStatus.Auth){
+    return <Navigate to={AppRoute.Main} />;
+  }
+
   return (
     <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href='/'>
+              <Link className="header__logo-link" to='/'>
                 <img className="header__logo" src='img/logo.svg' alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -64,9 +72,9 @@ function Login() {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to="/" onClick={onRandomCityClick}>
+                <span>{city}</span>
+              </Link>
             </div>
           </section>
         </div>

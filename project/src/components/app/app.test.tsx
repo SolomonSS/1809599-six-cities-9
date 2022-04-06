@@ -4,15 +4,15 @@ import {Provider} from 'react-redux';
 import App from './app';
 import {render, screen} from '@testing-library/react';
 import {fakeStore} from '../../utils/mocks';
-import HistoryRouter from '../history/history-route';
+import HistoryRoute from '../history/history-route';
 
 const history = createMemoryHistory();
 
 const fakeApp = (
   <Provider store={fakeStore}>
-    <HistoryRouter history={history}>
+    <HistoryRoute history={history}>
       <App/>
-    </HistoryRouter>
+    </HistoryRoute>
   </Provider>
 );
 
@@ -20,7 +20,7 @@ describe('Application Routing', () => {
   it('should render "MainScreen" when user navigate to "/"', () => {
     history.push(AppRoute.Main);
     render(fakeApp);
-    expect(screen.getByText(`No places to stay available`)).toBeInTheDocument();
+    expect(screen.getByText('No places to stay available')).toBeInTheDocument();
   });
   it('should render "Login" when user navigate to "AppRoute.Login"', () => {
     history.push(AppRoute.Login);

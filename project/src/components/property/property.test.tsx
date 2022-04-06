@@ -1,7 +1,7 @@
 import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
-import HistoryRouter from '../history/history-route';
+import HistoryRoute from '../history/history-route';
 import Property from './property';
 import {configureStore} from '@reduxjs/toolkit';
 import {rootReducer} from '../../store/reducers/root-reducer';
@@ -11,7 +11,7 @@ import {redirect} from '../../store/midlewares/redirect';
 describe('Testing Login item component', () => {
   it('Should return Login item component:', () => {
     const history = createMemoryHistory();
-    const fake_store = configureStore(
+    const enhancedStore = configureStore(
       {
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) =>
@@ -22,11 +22,11 @@ describe('Testing Login item component', () => {
           }).concat(redirect),
       });
     render(
-      <Provider store={fake_store}>
-        <HistoryRouter history={history}>
+      <Provider store={enhancedStore}>
+        <HistoryRoute history={history}>
           <Property/>
-        </HistoryRouter>
-      </Provider>
+        </HistoryRoute>
+      </Provider>,
     );
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });

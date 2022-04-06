@@ -23,9 +23,9 @@ const expectedResultCity = {
     lng: 20,
   },
   zoom: 10,
-}
+};
 
-describe('Hook: useMap ', () => {
+describe('Hook: useMap', () => {
   it('should return map:', () => {
     const {result} = renderHook(() =>
       useMap(fakeRef, fakeCity));

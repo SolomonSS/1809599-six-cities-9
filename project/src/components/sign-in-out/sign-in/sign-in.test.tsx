@@ -2,7 +2,7 @@ import {createMemoryHistory} from 'history';
 import {fakeStore} from '../../../utils/mocks';
 import SignIn from './sign-in';
 import {Provider} from 'react-redux';
-import HistoryRouter from '../../history/history-route';
+import HistoryRoute from '../../history/history-route';
 import {render, screen} from '@testing-library/react';
 
 describe('Testing SignIn component:', () => {
@@ -10,9 +10,9 @@ describe('Testing SignIn component:', () => {
     const history = createMemoryHistory();
     render(
       <Provider store={fakeStore}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <SignIn/>
-        </HistoryRouter>
+        </HistoryRoute>
       </Provider>);
     expect(screen.getByText('Sign in')).toBeInTheDocument();
   });

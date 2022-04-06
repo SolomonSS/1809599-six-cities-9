@@ -22,6 +22,7 @@ function Property() {
     dispatch(completeOffer(Number(propertyId)));
     dispatch(completeNearbyOffers(Number(propertyId)));
     dispatch(completeComments(Number(propertyId)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propertyId, reviews]);
 
   if (!isOfferLoaded) {
@@ -54,7 +55,7 @@ function Property() {
             <div className="property__gallery">
               {images.map((image) => (
                 <div className="property__image-wrapper" key={id.toString() + image}>
-                  <img className="property__image" src={image} alt="Photo studio"/>
+                  <img className="property__image" src={image} alt="studio"/>
                 </div>
               ))}
             </div>
@@ -96,9 +97,6 @@ function Property() {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
                   {goods.map((good) => (
                     <li className="property__inside-item" key={id + good}>
                       {good}
